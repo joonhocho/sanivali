@@ -1,5 +1,5 @@
 {
-  "name": "@joonhocho/sanivali",
+  "name": "sanivali",
   "version": "0.0.1",
   "description": "Sanitization and validation based on json schema with async and pre-compilation support for Node and Browser written in TypeScript.",
   "keywords": [
