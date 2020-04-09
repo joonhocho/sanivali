@@ -17,6 +17,7 @@ export interface ISanivaliDef<Arg = any, Val = any, Val2 = any> {
     validator?: GetValidator<Arg, Val>;
     async?: boolean;
     fatal?: boolean;
+    runOnNil?: boolean;
 }
 export interface ISanivaliDefMap {
     [type: string]: ISanivaliDef;
@@ -28,6 +29,7 @@ export interface ISanivaliCompiledDef {
     param?: any;
     async: boolean;
     fatal: boolean;
+    runOnNil: boolean;
 }
 export declare type SanivaliRule = string | [string] | [string, any] | Sanivali;
 export declare type SanivaliRuleMap = {
