@@ -5,7 +5,7 @@ import {
   ISanivaliResult,
   SanivaliRuleInput,
 } from './types';
-import { isSanivali } from './util';
+import { isSanivali, isEmptyObject } from './util';
 
 const leftWS = /^\s+/;
 const rightWS = /\s+$/;
@@ -34,6 +34,12 @@ export const defaultDefs: ISanivaliDefMap = {
         return (v) => (v == null ? value : v);
       }
       return (v) => (v === undefined ? value : v);
+    },
+  },
+  emptyToNull: {
+    sanitizer: (enable = true) => {
+      if (!enable) return null;
+      return (v) => (v == null || v === '' || isEmptyObject(v) ? null : v);
     },
   },
 
@@ -174,6 +180,15 @@ export const defaultDefs: ISanivaliDefMap = {
         return (v) => v.trimRight();
       }
       return (v) => v.replace(rightWS, '');
+    },
+  },
+  trimToNull: {
+    sanitizer: (enable = true) => {
+      if (!enable) return null;
+      if (typeof ''.trim === 'function') {
+        return (v) => (v && v.trim()) || null;
+      }
+      return (v) => (v && v.replace(leftWS, '').replace(rightWS, '')) || null;
     },
   },
 
