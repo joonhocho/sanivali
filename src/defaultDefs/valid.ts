@@ -7,4 +7,5 @@ export type ValidRuleItem = 'valid' | ['valid', ValidParam?];
 export const validDef: ISanivaliDef = {
   validator: (param?: ValidParam) =>
     param === false ? () => false : () => true,
+  runOnNil: true,
 };

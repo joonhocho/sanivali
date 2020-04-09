@@ -49,4 +49,5 @@ export const itemsDef: ISanivaliDef = {
       return { fatal: false, errors: errors.length ? errors : null, value };
     };
   },
+  runOnNil: true,
 };

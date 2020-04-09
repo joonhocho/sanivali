@@ -7,4 +7,5 @@ export type InstanceRuleItem = ['instance', InstanceParam];
 export const instanceDef: ISanivaliDef = {
   validator: (Class: InstanceParam) => (v) => v instanceof Class,
   fatal: true,
+  runOnNil: true,
 };

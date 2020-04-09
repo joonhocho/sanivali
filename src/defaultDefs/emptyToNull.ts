@@ -12,4 +12,5 @@ export const emptyToNullDef: ISanivaliDef = {
     if (enable === false) return null;
     return (v: unknown) => (isEmpty(v) ? null : v);
   },
+  runOnNil: true,
 };

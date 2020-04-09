@@ -62,4 +62,5 @@ export const ifElseDef: ISanivaliDef = {
       return thenSani ? thenSani.runSync(v, opts) : true;
     };
   },
+  runOnNil: true,
 };

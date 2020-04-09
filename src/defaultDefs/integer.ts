@@ -8,4 +8,5 @@ export type IntegerRuleItem = 'integer' | ['integer', IntegerParam?];
 export const integerDef: ISanivaliDef = {
   validator: (enable?: IntegerParam) => (enable === false ? null : isInteger),
   fatal: true,
+  runOnNil: true,
 };

@@ -23,4 +23,5 @@ export const enumDef: ISanivaliDef = {
     };
   },
   fatal: true,
+  runOnNil: true,
 };

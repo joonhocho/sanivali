@@ -1,7 +1,8 @@
 import { Sanivali } from '../sanivali';
+import { SanivaliDefaultRuleSchema } from '../defaultDefs';
 
 test('properties', async () => {
-  const sani = new Sanivali({
+  const sani = new Sanivali<any, SanivaliDefaultRuleSchema>({
     properties: {
       int: ['parseInt'],
       name: {
@@ -170,6 +171,7 @@ test('properties pattern', async () => {
       typeAsync: {
         validator: (type) => async (v) => typeof v === type,
         async: true,
+        runOnNil: true,
       },
     }
   );

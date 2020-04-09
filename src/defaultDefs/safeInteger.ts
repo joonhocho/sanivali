@@ -21,4 +21,5 @@ export const safeIntegerDef: ISanivaliDef = {
     return (v) => isFinite(v) && floor(v) === v && abs(v) <= MAX_SAFE_INTEGER;
   },
   fatal: true,
+  runOnNil: true,
 };

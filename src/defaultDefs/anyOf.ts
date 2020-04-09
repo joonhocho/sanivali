@@ -78,4 +78,5 @@ export const anyOfDef: ISanivaliDef = {
       };
     };
   },
+  runOnNil: true,
 };

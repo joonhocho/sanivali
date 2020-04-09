@@ -63,7 +63,7 @@ test('anyOf async', async () => {
 
   expect(await sani.run(undefined)).toStrictEqual({
     errors: [
-      { param: 'integer', type: 'type', value: null },
+      { param: 'integer', type: 'type', value: undefined },
       { param: 'null', type: 'type', value: undefined },
     ],
     fatal: false,

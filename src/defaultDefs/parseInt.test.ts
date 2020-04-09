@@ -6,7 +6,7 @@ test('parseInt', () => {
   expect(sani.run(undefined)).toStrictEqual({
     fatal: false,
     errors: null,
-    value: null,
+    value: undefined,
   });
 
   expect(sani.run(0)).toStrictEqual({

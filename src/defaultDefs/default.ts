@@ -39,4 +39,5 @@ export const compileDefaultParam = (param: DefaultParam) => {
 
 export const defaultDef: ISanivaliDef = {
   sanitizer: compileDefaultParam,
+  runOnNil: true,
 };

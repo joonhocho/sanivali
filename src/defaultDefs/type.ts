@@ -40,4 +40,5 @@ export const typeDef: ISanivaliDef = {
     return (v) => typeof v === param;
   },
   fatal: true,
+  runOnNil: true,
 };
