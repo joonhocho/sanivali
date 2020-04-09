@@ -108,9 +108,11 @@ export class Sanivali<T = any> {
         if (validator) {
           compiled.validate = validator(param, context);
         }
-        // this could be changed by complie validator(param, context) call
-        if (compiled.async) this.async = true;
-        rules.push(compiled);
+        if (compiled.sanitize || compiled.validate) {
+          // this could be changed by complie validator(param, context) call
+          if (compiled.async) this.async = true;
+          rules.push(compiled);
+        }
       }
     }
 

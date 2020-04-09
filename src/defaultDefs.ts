@@ -36,8 +36,8 @@ export const defaultDefs: ISanivaliDefMap = {
     },
   },
   emptyToNull: {
-    sanitizer: (enable = true) => {
-      if (!enable) return null;
+    sanitizer: (enable) => {
+      if (enable === false) return null;
       return (v) => (isEmpty(v) ? null : v);
     },
   },
@@ -99,6 +99,7 @@ export const defaultDefs: ISanivaliDefMap = {
   // number sanitizers
   parseInt: {
     sanitizer: (opts) => {
+      if (opts === false) return null;
       const radix = typeof opts === 'number' ? opts : 10;
       return (v) => {
         try {
@@ -111,27 +112,32 @@ export const defaultDefs: ISanivaliDefMap = {
     },
   },
   parseFloat: {
-    sanitizer: () => (v) => {
-      try {
-        const n = parseFloat(v);
-        return n === n ? n : null;
-      } catch (e) {
-        return null;
-      }
+    sanitizer: (enable) => {
+      if (enable === false) return null;
+      return (v) => {
+        try {
+          const n = parseFloat(v);
+          return n === n ? n : null;
+        } catch (e) {
+          return null;
+        }
+      };
     },
   },
 
   // number validators
   finite: {
-    validator: () => isFinite,
+    validator: (enable) => (enable === false ? null : isFinite),
     fatal: true,
   },
   integer: {
-    validator: () => isInteger,
+    validator: (enable) => (enable === false ? null : isInteger),
     fatal: true,
   },
   safeInteger: {
-    validator: () => {
+    validator: (enable) => {
+      if (enable === false) return null;
+
       if (Number.isSafeInteger) {
         return Number.isSafeInteger;
       }
@@ -158,8 +164,8 @@ export const defaultDefs: ISanivaliDefMap = {
 
   // string sanitizers
   trim: {
-    sanitizer: (enable = true) => {
-      if (!enable) return null;
+    sanitizer: (enable) => {
+      if (enable === false) return null;
       if (typeof ''.trim === 'function') {
         return (v) => v.trim();
       }
@@ -167,8 +173,8 @@ export const defaultDefs: ISanivaliDefMap = {
     },
   },
   trimLeft: {
-    sanitizer: (enable = true) => {
-      if (!enable) return null;
+    sanitizer: (enable) => {
+      if (enable === false) return null;
       if (typeof ''.trimLeft === 'function') {
         return (v) => v.trimLeft();
       }
@@ -176,8 +182,8 @@ export const defaultDefs: ISanivaliDefMap = {
     },
   },
   trimRight: {
-    sanitizer: (enable = true) => {
-      if (!enable) return null;
+    sanitizer: (enable) => {
+      if (enable === false) return null;
       if (typeof ''.trimRight === 'function') {
         return (v) => v.trimRight();
       }
@@ -185,8 +191,8 @@ export const defaultDefs: ISanivaliDefMap = {
     },
   },
   trimToNull: {
-    sanitizer: (enable = true) => {
-      if (!enable) return null;
+    sanitizer: (enable) => {
+      if (enable === false) return null;
       if (typeof ''.trim === 'function') {
         return (v) => (v && v.trim()) || null;
       }
@@ -203,10 +209,12 @@ export const defaultDefs: ISanivaliDefMap = {
       x.toLocaleUpperCase(locales),
   },
   toLowerCase: {
-    sanitizer: () => (x: string) => x.toLowerCase(),
+    sanitizer: (enable) =>
+      enable === false ? null : (x: string) => x.toLowerCase(),
   },
   toUpperCase: {
-    sanitizer: () => (x: string) => x.toUpperCase(),
+    sanitizer: (enable) =>
+      enable === false ? null : (x: string) => x.toUpperCase(),
   },
 
   // string validators
@@ -225,18 +233,24 @@ export const defaultDefs: ISanivaliDefMap = {
 
   // date sanitizer
   toDate: {
-    sanitizer: () => (x: number | string | Date): Date | null => {
-      const date = new Date(x);
-      const t = date.getTime();
-      return t === t ? date : null;
-    },
+    sanitizer: (enable) =>
+      enable === false
+        ? null
+        : (x: number | string | Date): Date | null => {
+            const date = new Date(x);
+            const t = date.getTime();
+            return t === t ? date : null;
+          },
   },
   toTimestamp: {
-    sanitizer: () => (x: number | string | Date): number | null => {
-      const date = new Date(x);
-      const t = date.getTime();
-      return t === t ? t : null;
-    },
+    sanitizer: (enable) =>
+      enable === false
+        ? null
+        : (x: number | string | Date): number | null => {
+            const date = new Date(x);
+            const t = date.getTime();
+            return t === t ? t : null;
+          },
   },
 
   // array sanitizers
