@@ -21,4 +21,4 @@ export {
   ValidationResult,
   Validator,
 } from './types';
-export { isEmptyObject, isSanivali } from './util';
+export { isEmpty, isEmptyObject, isInteger, isSanivali } from './util';

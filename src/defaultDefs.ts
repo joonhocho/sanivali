@@ -5,13 +5,12 @@ import {
   ISanivaliResult,
   SanivaliRuleInput,
 } from './types';
-import { isSanivali, isEmptyObject } from './util';
+import { isEmpty, isInteger, isSanivali } from './util';
 
 const leftWS = /^\s+/;
 const rightWS = /\s+$/;
 
 const { floor } = Math;
-const isInteger = Number.isInteger || ((v) => isFinite(v) && floor(v) === v);
 
 export const defaultDefs: ISanivaliDefMap = {
   // general sanitizers
@@ -39,7 +38,7 @@ export const defaultDefs: ISanivaliDefMap = {
   emptyToNull: {
     sanitizer: (enable = true) => {
       if (!enable) return null;
-      return (v) => (v == null || v === '' || isEmptyObject(v) ? null : v);
+      return (v) => (isEmpty(v) ? null : v);
     },
   },
 
@@ -417,7 +416,7 @@ export const defaultDefs: ISanivaliDefMap = {
       keys,
       excludeKeys,
     }: {
-      type?: 'undefined' | 'null' | null | 'nil';
+      type?: 'undefined' | 'null' | null | 'nil' | 'empty';
       keys?: string[];
       excludeKeys?: string[];
     } = {}) => {
@@ -426,6 +425,8 @@ export const defaultDefs: ISanivaliDefMap = {
         fn = (x) => x === undefined;
       } else if (type === 'null' || type === null) {
         fn = (x) => x === null;
+      } else if (type === 'empty') {
+        fn = isEmpty;
       } else {
         // nil
         fn = (x) => x == null;

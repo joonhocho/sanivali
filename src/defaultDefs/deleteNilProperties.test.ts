@@ -44,6 +44,20 @@ test('deleteNilProperties null', async () => {
   });
 });
 
+test('deleteNilProperties null', async () => {
+  const sani = new Sanivali({
+    deleteNilProperties: { type: 'empty' },
+  });
+
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '', f: {}, g: [] })
+  ).toEqual({
+    fatal: false,
+    errors: null,
+    value: { a: 0, c: false },
+  });
+});
+
 test('deleteNilProperties keys', async () => {
   const sani = new Sanivali({
     deleteNilProperties: { type: 'nil', keys: ['a', 'b'] },
