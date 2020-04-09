@@ -1,7 +1,19 @@
 import { ISanivaliDef } from '_src/types';
 import { isInteger } from '_src/util';
 
-export type TypeParam = string;
+export type TypeParam =
+  | 'array'
+  | 'bigint'
+  | 'boolean'
+  | 'function'
+  | 'integer'
+  | 'nil'
+  | 'null'
+  | 'number'
+  | 'object'
+  | 'string'
+  | 'symbol'
+  | 'undefined';
 
 export type TypeRuleItem = ['type', TypeParam];
 

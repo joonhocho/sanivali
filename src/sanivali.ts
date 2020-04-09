@@ -1,4 +1,4 @@
-import { defaultDefs } from './defaultDefs';
+import { defaultDefs, SanivaliDefaultRuleSchema } from './defaultDefs';
 import {
   ISanivaliBuildContext,
   ISanivaliCompiledDef,
@@ -7,12 +7,11 @@ import {
   ISanivaliResult,
   ISanivaliRunOptions,
   PropPath,
-  SanivaliRuleInput,
   ValidationResult,
 } from './types';
 import { isSanivali } from './util';
 
-export class Sanivali<T = any> {
+export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
   static is = isSanivali;
 
   public isSanivali = true;
@@ -20,11 +19,7 @@ export class Sanivali<T = any> {
   public async = false;
   private defs: ISanivaliDefMap = defaultDefs;
 
-  constructor(
-    rules?: SanivaliRuleInput,
-    defs?: ISanivaliDefMap,
-    public path?: PropPath
-  ) {
+  constructor(rules?: Schema, defs?: ISanivaliDefMap, public path?: PropPath) {
     if (defs) this.addDefs(defs);
     if (rules) this.addRule(rules);
   }
@@ -45,7 +40,7 @@ export class Sanivali<T = any> {
     return this;
   }
 
-  addRule(items: SanivaliRuleInput): Sanivali<T> {
+  addRule(items: Schema): Sanivali<T> {
     const { defs, rules, path } = this;
     const ruleItems: Array<[string, any] | Sanivali> = [];
 
@@ -66,7 +61,7 @@ export class Sanivali<T = any> {
         }
       }
     } else {
-      const types = Object.keys(items);
+      const types = Object.keys(items) as Array<keyof typeof items & string>;
       for (let i = 0, l = types.length; i < l; i += 1) {
         const type = types[i];
         const param = items[type];

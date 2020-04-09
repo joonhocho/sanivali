@@ -33,8 +33,14 @@ export {
   DefaultRuleItem,
   DefaultValue,
   DefaultValueThunk,
+  compileDefaultParam,
   defaultDef,
 } from './defaultDefs/default';
+export {
+  DefaultPropertiesParam,
+  DefaultPropertiesRuleItem,
+  defaultPropertiesDef,
+} from './defaultDefs/defaultProperties';
 export {
   DeleteNilPropertiesParam,
   DeleteNilPropertiesRuleItem,

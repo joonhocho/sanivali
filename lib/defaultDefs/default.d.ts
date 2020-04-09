@@ -6,5 +6,6 @@ export declare type DefaultParam = DefaultValueThunk | {
     onNull?: boolean;
 };
 export declare type DefaultRuleItem = ['default', DefaultParam];
+export declare const compileDefaultParam: (param: DefaultParam) => (v: unknown) => any;
 export declare const defaultDef: ISanivaliDef;
 //# sourceMappingURL=default.d.ts.map

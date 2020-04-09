@@ -1,9 +1,14 @@
 import { anyOfDef, AnyOfParam, AnyOfRuleItem } from './defaultDefs/anyOf';
 import {
   defaultDef,
-  DefaultRuleItem,
   DefaultParam,
+  DefaultRuleItem,
 } from './defaultDefs/default';
+import {
+  defaultPropertiesDef,
+  DefaultPropertiesParam,
+  DefaultPropertiesRuleItem,
+} from './defaultDefs/defaultProperties';
 import {
   deleteNilPropertiesDef,
   DeleteNilPropertiesParam,
@@ -247,6 +252,7 @@ export const defaultDefs: ISanivaliDefMap = {
   items: itemsDef,
 
   // object sanitizer
+  defaultProperties: defaultPropertiesDef,
   filterProperties: filterPropertiesDef,
   deleteNilProperties: deleteNilPropertiesDef,
 
@@ -322,6 +328,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
   items?: ItemsParam<T>;
 
   // object sanitizer
+  defaultProperties?: DefaultPropertiesParam;
   filterProperties?: FilterPropertiesParam;
   deleteNilProperties?: DeleteNilPropertiesParam;
 
@@ -395,6 +402,7 @@ export type SanivaliDefaultRuleItem<T = any> =
   | ItemsRuleItem<T>
 
   // object sanitizer
+  | DefaultPropertiesRuleItem
   | FilterPropertiesRuleItem
   | DeleteNilPropertiesRuleItem
 
@@ -413,4 +421,4 @@ export type SanivaliDefaultRuleItem<T = any> =
 
 export type SanivaliDefaultRuleSchema<T = any> =
   | ISanivaliDefaultRuleMap<T>
-  | SanivaliDefaultRuleItem<T>;
+  | Array<SanivaliDefaultRuleItem<T>>;
