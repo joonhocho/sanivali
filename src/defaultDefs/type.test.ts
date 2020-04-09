@@ -3,13 +3,13 @@ import { Sanivali } from '../sanivali';
 test('type undefined', () => {
   const sani = new Sanivali([['type', 'undefined']]);
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     fatal: false,
     errors: null,
     value: undefined,
   });
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -25,7 +25,7 @@ test('type undefined', () => {
 test('type null', () => {
   const sani = new Sanivali([['type', 'null']]);
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -37,7 +37,7 @@ test('type null', () => {
     value: undefined,
   });
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
@@ -47,19 +47,19 @@ test('type null', () => {
 test('type nil', () => {
   const sani = new Sanivali([['type', 'nil']]);
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     fatal: false,
     errors: null,
     value: undefined,
   });
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -75,7 +75,7 @@ test('type nil', () => {
 test('type boolean', () => {
   const sani = new Sanivali([['type', 'boolean']]);
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -87,7 +87,7 @@ test('type boolean', () => {
     value: undefined,
   });
 
-  expect(sani.run(1)).toEqual({
+  expect(sani.run(1)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -99,7 +99,7 @@ test('type boolean', () => {
     value: 1,
   });
 
-  expect(sani.run(false)).toEqual({
+  expect(sani.run(false)).toStrictEqual({
     fatal: false,
     errors: null,
     value: false,
@@ -109,7 +109,7 @@ test('type boolean', () => {
 test('type number', () => {
   const sani = new Sanivali([['type', 'number']]);
 
-  expect(sani.run(true)).toEqual({
+  expect(sani.run(true)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -121,7 +121,7 @@ test('type number', () => {
     value: true,
   });
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 0,
@@ -131,7 +131,7 @@ test('type number', () => {
 test('type string', () => {
   const sani = new Sanivali([['type', 'string']]);
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -143,7 +143,7 @@ test('type string', () => {
     value: 0,
   });
 
-  expect(sani.run('')).toEqual({
+  expect(sani.run('')).toStrictEqual({
     fatal: false,
     errors: null,
     value: '',
@@ -153,7 +153,7 @@ test('type string', () => {
 test('type integer', () => {
   const sani = new Sanivali([['type', 'integer']]);
 
-  expect(sani.run(0.5)).toEqual({
+  expect(sani.run(0.5)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -165,7 +165,7 @@ test('type integer', () => {
     value: 0.5,
   });
 
-  expect(sani.run(1)).toEqual({
+  expect(sani.run(1)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 1,
@@ -175,7 +175,7 @@ test('type integer', () => {
 test('type object', () => {
   const sani = new Sanivali([['type', 'object']]);
 
-  expect(sani.run([])).toEqual({
+  expect(sani.run([])).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -187,7 +187,7 @@ test('type object', () => {
     value: [],
   });
 
-  expect(sani.run({})).toEqual({
+  expect(sani.run({})).toStrictEqual({
     fatal: false,
     errors: null,
     value: {},
@@ -197,7 +197,7 @@ test('type object', () => {
 test('type array', () => {
   const sani = new Sanivali([['type', 'array']]);
 
-  expect(sani.run({})).toEqual({
+  expect(sani.run({})).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -209,7 +209,7 @@ test('type array', () => {
     value: {},
   });
 
-  expect(sani.run([])).toEqual({
+  expect(sani.run([])).toStrictEqual({
     fatal: false,
     errors: null,
     value: [],

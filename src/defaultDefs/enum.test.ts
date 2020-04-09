@@ -3,19 +3,19 @@ import { Sanivali } from '../sanivali';
 test('enum numbers', () => {
   const sani = new Sanivali([['enum', [1, 2, 3]]]);
 
-  expect(sani.run(1)).toEqual({
+  expect(sani.run(1)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 1,
   });
 
-  expect(sani.run(3)).toEqual({
+  expect(sani.run(3)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 3,
   });
 
-  expect(sani.run(4)).toEqual({
+  expect(sani.run(4)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -32,19 +32,19 @@ test('enum long numbers', () => {
   const enums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const sani = new Sanivali([['enum', enums]]);
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 0,
   });
 
-  expect(sani.run(10)).toEqual({
+  expect(sani.run(10)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 10,
   });
 
-  expect(sani.run(11)).toEqual({
+  expect(sani.run(11)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -61,43 +61,43 @@ test('enum long mixed', () => {
   const enums = [true, 0, 1, 2, 3, 4, 6, 7, 8, 9, 10, '11', null, undefined];
   const sani = new Sanivali([['enum', enums]]);
 
-  expect(sani.run(true)).toEqual({
+  expect(sani.run(true)).toStrictEqual({
     fatal: false,
     errors: null,
     value: true,
   });
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 0,
   });
 
-  expect(sani.run(10)).toEqual({
+  expect(sani.run(10)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 10,
   });
 
-  expect(sani.run('11')).toEqual({
+  expect(sani.run('11')).toStrictEqual({
     fatal: false,
     errors: null,
     value: '11',
   });
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     fatal: false,
     errors: null,
     value: undefined,
   });
 
-  expect(sani.run(false)).toEqual({
+  expect(sani.run(false)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -109,7 +109,7 @@ test('enum long mixed', () => {
     value: false,
   });
 
-  expect(sani.run(11)).toEqual({
+  expect(sani.run(11)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -121,7 +121,7 @@ test('enum long mixed', () => {
     value: 11,
   });
 
-  expect(sani.run('10')).toEqual({
+  expect(sani.run('10')).toStrictEqual({
     fatal: true,
     errors: [
       {

@@ -17,7 +17,7 @@ test('filterProperties', async () => {
       e: '',
       f: 4,
     })
-  ).toEqual({
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, f: 4 },

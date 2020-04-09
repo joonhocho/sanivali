@@ -3,61 +3,61 @@ import { Sanivali } from '../sanivali';
 test('emptyToNull', () => {
   const sani = new Sanivali(['emptyToNull']);
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run(false)).toEqual({
+  expect(sani.run(false)).toStrictEqual({
     fatal: false,
     errors: null,
     value: false,
   });
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 0,
   });
 
-  expect(sani.run('')).toEqual({
+  expect(sani.run('')).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run(' ')).toEqual({
+  expect(sani.run(' ')).toStrictEqual({
     fatal: false,
     errors: null,
     value: ' ',
   });
 
-  expect(sani.run([])).toEqual({
+  expect(sani.run([])).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run([null])).toEqual({
+  expect(sani.run([null])).toStrictEqual({
     fatal: false,
     errors: null,
     value: [null],
   });
 
-  expect(sani.run({})).toEqual({
+  expect(sani.run({})).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run({ a: null })).toEqual({
+  expect(sani.run({ a: null })).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: null },

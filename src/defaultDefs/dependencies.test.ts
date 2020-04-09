@@ -8,9 +8,9 @@ test('dependencies', async () => {
 
   const sani = new Sanivali({ dependencies });
 
-  expect(sani.run({})).toEqual({ errors: null, fatal: false, value: {} });
+  expect(sani.run({})).toStrictEqual({ errors: null, fatal: false, value: {} });
 
-  expect(sani.run({ a: 1 })).toEqual({
+  expect(sani.run({ a: 1 })).toStrictEqual({
     errors: [
       {
         param: dependencies,
@@ -22,7 +22,7 @@ test('dependencies', async () => {
     value: { a: 1 },
   });
 
-  expect(sani.run({ a: 1, b: 2 })).toEqual({
+  expect(sani.run({ a: 1, b: 2 })).toStrictEqual({
     errors: [
       {
         param: dependencies,
@@ -34,7 +34,7 @@ test('dependencies', async () => {
     value: { a: 1, b: 2 },
   });
 
-  expect(sani.run({ a: 1, b: 2, c: 3 })).toEqual({
+  expect(sani.run({ a: 1, b: 2, c: 3 })).toStrictEqual({
     errors: [
       {
         param: dependencies,
@@ -46,13 +46,13 @@ test('dependencies', async () => {
     value: { a: 1, b: 2, c: 3 },
   });
 
-  expect(sani.run({ a: 1, b: 2, c: 3, d: 4 })).toEqual({
+  expect(sani.run({ a: 1, b: 2, c: 3, d: 4 })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: 1, b: 2, c: 3, d: 4 },
   });
 
-  expect(sani.run({ c: 3 })).toEqual({
+  expect(sani.run({ c: 3 })).toStrictEqual({
     errors: [
       {
         param: dependencies,
@@ -64,7 +64,7 @@ test('dependencies', async () => {
     value: { c: 3 },
   });
 
-  expect(sani.run({ c: 3, d: 4 })).toEqual({
+  expect(sani.run({ c: 3, d: 4 })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { c: 3, d: 4 },

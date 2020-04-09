@@ -148,9 +148,7 @@ test('properties pattern', async () => {
   expect(
     sani.run({ a: '', n1: 1, b1: false, a1: 3, invalidkey: 1 })
   ).toStrictEqual({
-    errors: [
-      { param: undefined, path: ['invalidkey'], type: 'invalid', value: 1 },
-    ],
+    errors: [{ path: ['invalidkey'], type: 'invalid', value: 1 }],
     fatal: false,
     value: { a: '', a1: 3, b1: false, invalidkey: 1, n1: 1 },
   });
@@ -235,9 +233,7 @@ test('properties pattern', async () => {
   expect(
     await sani.run({ a: '', n1: 1, b1: false, a1: 3, invalidkey: 1 })
   ).toStrictEqual({
-    errors: [
-      { param: undefined, path: ['invalidkey'], type: 'invalid', value: 1 },
-    ],
+    errors: [{ path: ['invalidkey'], type: 'invalid', value: 1 }],
     fatal: false,
     value: { a: '', a1: 3, b1: false, invalidkey: 1, n1: 1 },
   });

@@ -55,7 +55,7 @@ export interface ISanivaliCompiledDef {
   type: string;
   sanitize: AsyncSanitizer | null;
   validate: AsyncValidator | null;
-  param: any;
+  param?: any;
   async: boolean;
   fatal: boolean;
 }
@@ -76,7 +76,7 @@ export interface ISanivaliRunOptions {
 export interface ISanivaliError {
   path?: PropPath;
   type: string;
-  param: any;
+  param?: any;
   value: unknown;
 }
 

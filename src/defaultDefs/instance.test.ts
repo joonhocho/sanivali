@@ -4,13 +4,13 @@ test('instance Date', () => {
   const sani = new Sanivali([['instance', Date]]);
 
   const date = new Date();
-  expect(sani.run(date)).toEqual({
+  expect(sani.run(date)).toStrictEqual({
     fatal: false,
     errors: null,
     value: date,
   });
 
-  expect(sani.run(1)).toEqual({
+  expect(sani.run(1)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -22,7 +22,7 @@ test('instance Date', () => {
     value: 1,
   });
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: true,
     errors: [
       {

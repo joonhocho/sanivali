@@ -3,13 +3,13 @@ import { Sanivali } from '../sanivali';
 test('items', async () => {
   const sani = new Sanivali([['items', ['parseInt']]]);
 
-  expect(sani.run(['1', 2, '3.5'])).toEqual({
+  expect(sani.run(['1', 2, '3.5'])).toStrictEqual({
     fatal: false,
     errors: null,
     value: [1, 2, 3],
   });
 
-  expect(await sani.runAsync(['1', 2, '3.5'])).toEqual({
+  expect(await sani.runAsync(['1', 2, '3.5'])).toStrictEqual({
     fatal: false,
     errors: null,
     value: [1, 2, 3],
@@ -22,7 +22,7 @@ test('items', async () => {
 
   sani.addRule([['items', [['minAsync', 3]]]]);
 
-  expect(await sani.run(['1', 2, '3.5'])).toEqual({
+  expect(await sani.run(['1', 2, '3.5'])).toStrictEqual({
     fatal: false,
     errors: [
       { param: 3, path: [0], type: 'minAsync', value: 1 },
@@ -31,7 +31,7 @@ test('items', async () => {
     value: [1, 2, 3],
   });
 
-  expect(await sani.runAsync(['1', 2, '3.5'])).toEqual({
+  expect(await sani.runAsync(['1', 2, '3.5'])).toStrictEqual({
     fatal: false,
     errors: [
       { param: 3, path: [0], type: 'minAsync', value: 1 },

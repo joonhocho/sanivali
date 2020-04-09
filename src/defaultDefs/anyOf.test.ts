@@ -5,7 +5,7 @@ test('anyOf', async () => {
     anyOf: [{ type: 'string', minLength: 3 }, { type: 'null' }],
   });
 
-  expect(sani.run(undefined)).toEqual({
+  expect(sani.run(undefined)).toStrictEqual({
     errors: [
       { param: 'string', type: 'type', value: undefined },
       { param: 'null', type: 'type', value: undefined },
@@ -14,7 +14,7 @@ test('anyOf', async () => {
     value: undefined,
   });
 
-  expect(sani.run(1)).toEqual({
+  expect(sani.run(1)).toStrictEqual({
     errors: [
       { param: 'string', type: 'type', value: 1 },
       { param: 'null', type: 'type', value: 1 },
@@ -23,9 +23,13 @@ test('anyOf', async () => {
     value: 1,
   });
 
-  expect(sani.run(null)).toEqual({ errors: null, fatal: false, value: null });
+  expect(sani.run(null)).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: null,
+  });
 
-  expect(sani.run('')).toEqual({
+  expect(sani.run('')).toStrictEqual({
     errors: [
       { param: 3, type: 'minLength', value: '' },
       { param: 'null', type: 'type', value: '' },
@@ -34,7 +38,11 @@ test('anyOf', async () => {
     value: '',
   });
 
-  expect(sani.run('abc')).toEqual({ errors: null, fatal: false, value: 'abc' });
+  expect(sani.run('abc')).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: 'abc',
+  });
 });
 
 test('anyOf async', async () => {
@@ -53,7 +61,7 @@ test('anyOf async', async () => {
     }
   );
 
-  expect(await sani.run(undefined)).toEqual({
+  expect(await sani.run(undefined)).toStrictEqual({
     errors: [
       { param: 'integer', type: 'type', value: null },
       { param: 'null', type: 'type', value: undefined },
@@ -62,7 +70,7 @@ test('anyOf async', async () => {
     value: undefined,
   });
 
-  expect(await sani.run('1')).toEqual({
+  expect(await sani.run('1')).toStrictEqual({
     errors: [
       { param: 3, type: 'minAsync', value: 1 },
       { param: 'null', type: 'type', value: '1' },
@@ -71,9 +79,13 @@ test('anyOf async', async () => {
     value: '1',
   });
 
-  expect(await sani.run('3')).toEqual({ errors: null, fatal: false, value: 3 });
+  expect(await sani.run('3')).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: 3,
+  });
 
-  expect(await sani.run(null)).toEqual({
+  expect(await sani.run(null)).toStrictEqual({
     errors: null,
     fatal: false,
     value: null,

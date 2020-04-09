@@ -3,19 +3,19 @@ import { Sanivali } from '../sanivali';
 test('finite', () => {
   const sani = new Sanivali([['finite']]);
 
-  expect(sani.run(null)).toEqual({
+  expect(sani.run(null)).toStrictEqual({
     fatal: false,
     errors: null,
     value: null,
   });
 
-  expect(sani.run(0)).toEqual({
+  expect(sani.run(0)).toStrictEqual({
     fatal: false,
     errors: null,
     value: 0,
   });
 
-  expect(sani.run(Infinity)).toEqual({
+  expect(sani.run(Infinity)).toStrictEqual({
     fatal: true,
     errors: [
       {
@@ -26,7 +26,7 @@ test('finite', () => {
     value: Infinity,
   });
 
-  expect(sani.run(NaN)).toEqual({
+  expect(sani.run(NaN)).toStrictEqual({
     fatal: true,
     errors: [
       {

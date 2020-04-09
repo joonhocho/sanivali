@@ -9,17 +9,17 @@ test('ifElse', async () => {
     },
   });
 
-  expect(sani.run('  a  ')).toEqual({
+  expect(sani.run('  a  ')).toStrictEqual({
     errors: null,
     fatal: false,
     value: 'a',
   });
 
-  expect(sani.run(true)).toEqual({
+  expect(sani.run(true)).toStrictEqual({
     errors: [{ param: 'number', type: 'type', value: true }],
     fatal: true,
     value: true,
   });
 
-  expect(sani.run(3.5)).toEqual({ errors: null, fatal: false, value: 3 });
+  expect(sani.run(3.5)).toStrictEqual({ errors: null, fatal: false, value: 3 });
 });

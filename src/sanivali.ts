@@ -89,10 +89,13 @@ export class Sanivali<T = any> {
           type,
           sanitize: null,
           validate: null,
-          param,
           async: !!async,
           fatal: !!fatal,
         };
+
+        if (param !== undefined) {
+          compiled.param = param;
+        }
 
         const context: ISanivaliBuildContext = {
           path,
@@ -163,7 +166,11 @@ export class Sanivali<T = any> {
             if (typeof res === 'boolean') {
               if (!res) {
                 errors.push(
-                  hasPath
+                  param === undefined
+                    ? hasPath
+                      ? { path, type, value: v }
+                      : { type, value: v }
+                    : hasPath
                     ? { path, type, param, value: v }
                     : { type, param, value: v }
                 );
@@ -238,7 +245,11 @@ export class Sanivali<T = any> {
           if (typeof res === 'boolean') {
             if (!res) {
               errors.push(
-                hasPath
+                param === undefined
+                  ? hasPath
+                    ? { path, type, value: v }
+                    : { type, value: v }
+                  : hasPath
                   ? { path, type, param, value: v }
                   : { type, param, value: v }
               );

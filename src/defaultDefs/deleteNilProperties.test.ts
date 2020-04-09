@@ -3,7 +3,9 @@ import { Sanivali } from '../sanivali';
 test('deleteNilProperties default', async () => {
   const sani = new Sanivali([['deleteNilProperties']]);
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, c: false, e: '' },
@@ -13,7 +15,9 @@ test('deleteNilProperties default', async () => {
 test('deleteNilProperties nil', async () => {
   const sani = new Sanivali([['deleteNilProperties', { type: 'nil' }]]);
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, c: false, e: '' },
@@ -25,7 +29,9 @@ test('deleteNilProperties undefined', async () => {
     deleteNilProperties: { type: 'undefined' },
   });
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, b: null, c: false, e: '' },
@@ -37,7 +43,9 @@ test('deleteNilProperties null', async () => {
     deleteNilProperties: { type: 'null' },
   });
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, c: false, d: undefined, e: '' },
@@ -51,7 +59,7 @@ test('deleteNilProperties null', async () => {
 
   expect(
     sani.run({ a: 0, b: null, c: false, d: undefined, e: '', f: {}, g: [] })
-  ).toEqual({
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, c: false },
@@ -63,7 +71,9 @@ test('deleteNilProperties keys', async () => {
     deleteNilProperties: { type: 'nil', keys: ['a', 'b'] },
   });
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, c: false, d: undefined, e: '' },
@@ -75,7 +85,9 @@ test('deleteNilProperties keys', async () => {
     deleteNilProperties: { type: 'nil', keys: ['a', 'b', 'd'] },
   });
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, c: false, e: '' },
@@ -91,7 +103,9 @@ test('deleteNilProperties excludeKeys', async () => {
     },
   });
 
-  expect(sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })).toEqual({
+  expect(
+    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { a: 0, b: null, c: false, e: '' },
