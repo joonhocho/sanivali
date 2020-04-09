@@ -85,10 +85,3 @@ export interface ISanivaliResult {
   errors: ISanivaliError[] | null;
   value: unknown;
 }
-
-//  ['type', 'string'],
-//  'trim',
-//  ['maxLength', 10],
-//  ['length', {min: 5, max: 10 }],
-//  ['pattern', '^asuh$'],
-//  ['or', [['minLength': 10], ['maxLength', 20]]],

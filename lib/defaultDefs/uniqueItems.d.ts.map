@@ -1,0 +1,1 @@
+{"version":3,"file":"uniqueItems.d.ts","sourceRoot":"","sources":["../../src/defaultDefs/uniqueItems.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,YAAY,CAAC;AAE1C,oBAAY,gBAAgB,GAAG,MAAM,GAAG,CAAC,CAAC,CAAC,EAAE,GAAG,KAAK,MAAM,CAAC,GAAG,SAAS,CAAC;AAEzE,oBAAY,mBAAmB,GAC3B,aAAa,GACb,CAAC,aAAa,EAAE,gBAAgB,CAAC,CAAC,CAAC;AAEvC,eAAO,MAAM,cAAc,EAAE,YA0C5B,CAAC"}

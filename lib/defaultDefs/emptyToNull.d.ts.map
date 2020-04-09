@@ -1,0 +1,1 @@
+{"version":3,"file":"emptyToNull.d.ts","sourceRoot":"","sources":["../../src/defaultDefs/emptyToNull.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,YAAY,CAAC;AAG1C,oBAAY,gBAAgB,GAAG,OAAO,GAAG,SAAS,CAAC;AAEnD,oBAAY,mBAAmB,GAC3B,aAAa,GACb,CAAC,aAAa,EAAE,gBAAgB,CAAC,CAAC,CAAC;AAEvC,eAAO,MAAM,cAAc,EAAE,YAK5B,CAAC"}

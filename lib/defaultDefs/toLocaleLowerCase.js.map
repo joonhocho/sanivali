@@ -1,0 +1,1 @@
+{"version":3,"file":"toLocaleLowerCase.js","sourceRoot":"","sources":["../../src/defaultDefs/toLocaleLowerCase.ts"],"names":[],"mappings":"AAQA,MAAM,CAAC,MAAM,oBAAoB,GAAiB;IAChD,SAAS,EAAE,CAAC,OAAgC,EAAE,EAAE,CAAC,CAAC,CAAS,EAAE,EAAE,CAC7D,CAAC,CAAC,iBAAiB,CAAC,OAAO,CAAC;CAC/B,CAAC"}

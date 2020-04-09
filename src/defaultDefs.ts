@@ -1,812 +1,416 @@
-import { Sanivali } from './sanivali';
+import { anyOfDef, AnyOfParam, AnyOfRuleItem } from './defaultDefs/anyOf';
 import {
-  ISanivaliDefMap,
-  ISanivaliError,
-  ISanivaliResult,
-  SanivaliRuleInput,
-} from './types';
-import { isEmpty, isInteger, isSanivali } from './util';
-
-const leftWS = /^\s+/;
-const rightWS = /\s+$/;
-
-const { floor } = Math;
+  defaultDef,
+  DefaultRuleItem,
+  DefaultParam,
+} from './defaultDefs/default';
+import {
+  deleteNilPropertiesDef,
+  DeleteNilPropertiesParam,
+  DeleteNilPropertiesRuleItem,
+} from './defaultDefs/deleteNilProperties';
+import {
+  dependenciesDef,
+  DependenciesParam,
+  DependenciesRuleItem,
+} from './defaultDefs/dependencies';
+import {
+  emptyToNullDef,
+  EmptyToNullParam,
+  EmptyToNullRuleItem,
+} from './defaultDefs/emptyToNull';
+import { enumDef, EnumParam, EnumRuleItem } from './defaultDefs/enum';
+import {
+  exclusiveMaximumDef,
+  ExclusiveMaximumParam,
+  ExclusiveMaximumRuleItem,
+} from './defaultDefs/exclusiveMaximum';
+import {
+  exclusiveMinimumDef,
+  ExclusiveMinimumParam,
+  ExclusiveMinimumRuleItem,
+} from './defaultDefs/exclusiveMinimum';
+import {
+  filterItemsDef,
+  FilterItemsParam,
+  FilterItemsRuleItem,
+} from './defaultDefs/filterItems';
+import {
+  filterPropertiesDef,
+  FilterPropertiesParam,
+  FilterPropertiesRuleItem,
+} from './defaultDefs/filterProperties';
+import { finiteDef, FiniteParam, FiniteRuleItem } from './defaultDefs/finite';
+import { ifElseDef, IfElseParam, IfElseRuleItem } from './defaultDefs/ifElse';
+import {
+  instanceDef,
+  InstanceParam,
+  InstanceRuleItem,
+} from './defaultDefs/instance';
+import {
+  integerDef,
+  IntegerParam,
+  IntegerRuleItem,
+} from './defaultDefs/integer';
+import {
+  invalidDef,
+  InvalidParam,
+  InvalidRuleItem,
+} from './defaultDefs/invalid';
+import { itemsDef, ItemsParam, ItemsRuleItem } from './defaultDefs/items';
+import {
+  maximumDef,
+  MaximumParam,
+  MaximumRuleItem,
+} from './defaultDefs/maximum';
+import {
+  maxItemsDef,
+  MaxItemsParam,
+  MaxItemsRuleItem,
+} from './defaultDefs/maxItems';
+import {
+  maxLengthDef,
+  MaxLengthParam,
+  MaxLengthRuleItem,
+} from './defaultDefs/maxLength';
+import {
+  maxPropertiesDef,
+  MaxPropertiesParam,
+  MaxPropertiesRuleItem,
+} from './defaultDefs/maxProperties';
+import {
+  minimumDef,
+  MinimumParam,
+  MinimumRuleItem,
+} from './defaultDefs/minimum';
+import {
+  minItemsDef,
+  MinItemsParam,
+  MinItemsRuleItem,
+} from './defaultDefs/minItems';
+import {
+  minLengthDef,
+  MinLengthParam,
+  MinLengthRuleItem,
+} from './defaultDefs/minLength';
+import {
+  minPropertiesDef,
+  MinPropertiesParam,
+  MinPropertiesRuleItem,
+} from './defaultDefs/minProperties';
+import {
+  parseFloatDef,
+  ParseFloatParam,
+  ParseFloatRuleItem,
+} from './defaultDefs/parseFloat';
+import {
+  parseIntDef,
+  ParseIntParam,
+  ParseIntRuleItem,
+} from './defaultDefs/parseInt';
+import {
+  patternDef,
+  PatternParam,
+  PatternRuleItem,
+} from './defaultDefs/pattern';
+import {
+  propertiesDef,
+  PropertiesParam,
+  PropertiesRuleItem,
+} from './defaultDefs/properties';
+import {
+  removeDuplicateItemsDef,
+  RemoveDuplicateItemsParam,
+  RemoveDuplicateItemsRuleItem,
+} from './defaultDefs/removeDuplicateItems';
+import {
+  removeNilItemsDef,
+  RemoveNilItemsParam,
+  RemoveNilItemsRuleItem,
+} from './defaultDefs/removeNilItems';
+import {
+  requiredDef,
+  RequiredParam,
+  RequiredRuleItem,
+} from './defaultDefs/required';
+import {
+  safeIntegerDef,
+  SafeIntegerParam,
+  SafeIntegerRuleItem,
+} from './defaultDefs/safeInteger';
+import { toDateDef, ToDateParam, ToDateRuleItem } from './defaultDefs/toDate';
+import {
+  toLocaleLowerCaseDef,
+  ToLocaleLowerCaseParam,
+  ToLocaleLowerCaseRuleItem,
+} from './defaultDefs/toLocaleLowerCase';
+import {
+  toLocaleUpperCaseDef,
+  ToLocaleUpperCaseParam,
+  ToLocaleUpperCaseRuleItem,
+} from './defaultDefs/toLocaleUpperCase';
+import {
+  toLowerCaseDef,
+  ToLowerCaseParam,
+  ToLowerCaseRuleItem,
+} from './defaultDefs/toLowerCase';
+import {
+  toTimestampDef,
+  ToTimestampParam,
+  ToTimestampRuleItem,
+} from './defaultDefs/toTimestamp';
+import {
+  toUpperCaseDef,
+  ToUpperCaseParam,
+  ToUpperCaseRuleItem,
+} from './defaultDefs/toUpperCase';
+import { trimDef, TrimParam, TrimRuleItem } from './defaultDefs/trim';
+import {
+  trimLeftDef,
+  TrimLeftParam,
+  TrimLeftRuleItem,
+} from './defaultDefs/trimLeft';
+import {
+  trimRightDef,
+  TrimRightParam,
+  TrimRightRuleItem,
+} from './defaultDefs/trimRight';
+import {
+  trimToNullDef,
+  TrimToNullParam,
+  TrimToNullRuleItem,
+} from './defaultDefs/trimToNull';
+import { typeDef, TypeParam, TypeRuleItem } from './defaultDefs/type';
+import {
+  uniqueItemsDef,
+  UniqueItemsParam,
+  UniqueItemsRuleItem,
+} from './defaultDefs/uniqueItems';
+import { validDef, ValidParam, ValidRuleItem } from './defaultDefs/valid';
+import { ISanivaliDefMap } from './types';
 
 export const defaultDefs: ISanivaliDefMap = {
   // general sanitizers
-  default: {
-    sanitizer: (opts) => {
-      let value = opts;
-      let onNull = false;
-      if (opts && typeof opts === 'object') {
-        value = opts.value;
-        onNull = opts.onNull;
-      }
-
-      if (typeof value === 'function') {
-        if (onNull) {
-          return (v) => (v == null ? value() : v);
-        }
-        return (v) => (v === undefined ? value() : v);
-      }
-      if (onNull) {
-        return (v) => (v == null ? value : v);
-      }
-      return (v) => (v === undefined ? value : v);
-    },
-  },
-  emptyToNull: {
-    sanitizer: (enable) => {
-      if (enable === false) return null;
-      return (v) => (isEmpty(v) ? null : v);
-    },
-  },
+  default: defaultDef,
+  emptyToNull: emptyToNullDef,
 
   // general validators
-  valid: {
-    validator: () => () => true,
-  },
-  invalid: {
-    validator: () => () => false,
-  },
-  type: {
-    validator: (type: string) => {
-      if (type === 'undefined') {
-        return (v) => v === undefined;
-      }
-      if (type === 'null') {
-        return (v) => v === null;
-      }
-      if (type === 'nil') {
-        return (v) => v == null;
-      }
-      if (type === 'object') {
-        return (v) => v != null && typeof v === 'object' && !Array.isArray(v);
-      }
-      if (type === 'array') {
-        return Array.isArray;
-      }
-      if (type === 'integer') {
-        return (v) => typeof v === 'number' && isInteger(v);
-      }
-      return (v) => typeof v === type;
-    },
-    fatal: true,
-  },
-  instance: {
-    validator: (Class) => (v) => v instanceof Class,
-    fatal: true,
-  },
-  enum: {
-    validator: (enums: any[]) => {
-      if (enums.length <= 5) {
-        return (v) => enums.indexOf(v) !== -1;
-      }
-      const enumMap: { [type: string]: { [key: string]: 1 } } = {};
-      for (let i = 0, l = enums.length; i < l; i += 1) {
-        const v = enums[i];
-        const type = typeof v;
-        (enumMap[type] || (enumMap[type] = {}))[v] = 1;
-      }
-      return (v) => {
-        const type = typeof v;
-        return type in enumMap && enumMap[type][v] === 1;
-      };
-    },
-    fatal: true,
-  },
+  valid: validDef,
+  invalid: invalidDef,
+  type: typeDef,
+  instance: instanceDef,
+  enum: enumDef,
 
   // number sanitizers
-  parseInt: {
-    sanitizer: (opts) => {
-      if (opts === false) return null;
-      const radix = typeof opts === 'number' ? opts : 10;
-      return (v) => {
-        try {
-          const n = parseInt(v, radix);
-          return n === n ? n : null;
-        } catch (e) {
-          return null;
-        }
-      };
-    },
-  },
-  parseFloat: {
-    sanitizer: (enable) => {
-      if (enable === false) return null;
-      return (v) => {
-        try {
-          const n = parseFloat(v);
-          return n === n ? n : null;
-        } catch (e) {
-          return null;
-        }
-      };
-    },
-  },
+  parseInt: parseIntDef,
+  parseFloat: parseFloatDef,
 
   // number validators
-  finite: {
-    validator: (enable) => (enable === false ? null : isFinite),
-    fatal: true,
-  },
-  integer: {
-    validator: (enable) => (enable === false ? null : isInteger),
-    fatal: true,
-  },
-  safeInteger: {
-    validator: (enable) => {
-      if (enable === false) return null;
+  finite: finiteDef,
+  integer: integerDef,
+  safeInteger: safeIntegerDef,
+  minimum: minimumDef,
+  exclusiveMinimum: exclusiveMinimumDef,
 
-      if (Number.isSafeInteger) {
-        return Number.isSafeInteger;
-      }
-
-      const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
-      const { abs } = Math;
-      return (v) => isFinite(v) && floor(v) === v && abs(v) <= MAX_SAFE_INTEGER;
-    },
-    fatal: true,
-  },
-  minimum: {
-    validator: (min: number) => (v) => v >= min,
-  },
-  exclusiveMinimum: {
-    validator: (min: number) => (v) => v > min,
-  },
-
-  maximum: {
-    validator: (max: number) => (v) => v <= max,
-  },
-  exclusiveMaximum: {
-    validator: (max: number) => (v) => v < max,
-  },
+  maximum: maximumDef,
+  exclusiveMaximum: exclusiveMaximumDef,
 
   // string sanitizers
-  trim: {
-    sanitizer: (enable) => {
-      if (enable === false) return null;
-      if (typeof ''.trim === 'function') {
-        return (v) => v.trim();
-      }
-      return (v) => v.replace(leftWS, '').replace(rightWS, '');
-    },
-  },
-  trimLeft: {
-    sanitizer: (enable) => {
-      if (enable === false) return null;
-      if (typeof ''.trimLeft === 'function') {
-        return (v) => v.trimLeft();
-      }
-      return (v) => v.replace(leftWS, '');
-    },
-  },
-  trimRight: {
-    sanitizer: (enable) => {
-      if (enable === false) return null;
-      if (typeof ''.trimRight === 'function') {
-        return (v) => v.trimRight();
-      }
-      return (v) => v.replace(rightWS, '');
-    },
-  },
-  trimToNull: {
-    sanitizer: (enable) => {
-      if (enable === false) return null;
-      if (typeof ''.trim === 'function') {
-        return (v) => (v && v.trim()) || null;
-      }
-      return (v) => (v && v.replace(leftWS, '').replace(rightWS, '')) || null;
-    },
-  },
+  trim: trimDef,
+  trimLeft: trimLeftDef,
+  trimRight: trimRightDef,
+  trimToNull: trimToNullDef,
 
-  toLocaleLowerCase: {
-    sanitizer: (locales?: string | string[]) => (x: string) =>
-      x.toLocaleLowerCase(locales),
-  },
-  toLocaleUpperCase: {
-    sanitizer: (locales?: string | string[]) => (x: string) =>
-      x.toLocaleUpperCase(locales),
-  },
-  toLowerCase: {
-    sanitizer: (enable) =>
-      enable === false ? null : (x: string) => x.toLowerCase(),
-  },
-  toUpperCase: {
-    sanitizer: (enable) =>
-      enable === false ? null : (x: string) => x.toUpperCase(),
-  },
+  toLocaleLowerCase: toLocaleLowerCaseDef,
+  toLocaleUpperCase: toLocaleUpperCaseDef,
+  toLowerCase: toLowerCaseDef,
+  toUpperCase: toUpperCaseDef,
 
   // string validators
-  minLength: {
-    validator: (min: number) => (v) => v.length >= min,
-  },
-  maxLength: {
-    validator: (max: number) => (v) => v.length <= max,
-  },
-  pattern: {
-    validator: (pattern: string | RegExp) => {
-      const reg = typeof pattern === 'string' ? new RegExp(pattern) : pattern;
-      return (v) => reg.test(v);
-    },
-  },
+  minLength: minLengthDef,
+  maxLength: maxLengthDef,
+  pattern: patternDef,
 
   // date sanitizer
-  toDate: {
-    sanitizer: (enable) =>
-      enable === false
-        ? null
-        : (x: number | string | Date): Date | null => {
-            const date = new Date(x);
-            const t = date.getTime();
-            return t === t ? date : null;
-          },
-  },
-  toTimestamp: {
-    sanitizer: (enable) =>
-      enable === false
-        ? null
-        : (x: number | string | Date): number | null => {
-            const date = new Date(x);
-            const t = date.getTime();
-            return t === t ? t : null;
-          },
-  },
+  toDate: toDateDef,
+  toTimestamp: toTimestampDef,
 
   // array sanitizers
-  filterItems: {
-    sanitizer: (fn: (x: any, i: number) => boolean) => (v: any[]) =>
-      v.filter(fn),
-  },
-
-  removeDuplicateItems: {
-    sanitizer: (getKey?: string | ((x: any) => string)) => {
-      if (typeof getKey === 'string') {
-        return (v: any[]) => {
-          const keyMap = {} as Record<string, 1>;
-          const filtered = [] as any[];
-          for (let i = 0, l = v.length; i < l; i += 1) {
-            const x = v[i];
-            const key = x[getKey];
-            if (keyMap[key] !== 1) {
-              keyMap[key] = 1;
-              filtered.push(x);
-            }
-          }
-          return filtered;
-        };
-      }
-      if (getKey) {
-        return (v: any[]) => {
-          const keyMap = {} as Record<string, 1>;
-          const filtered = [] as any[];
-          for (let i = 0, l = v.length; i < l; i += 1) {
-            const x = v[i];
-            const key = getKey(x);
-            if (keyMap[key] !== 1) {
-              keyMap[key] = 1;
-              filtered.push(x);
-            }
-          }
-          return filtered;
-        };
-      }
-      return (v: any[]) => {
-        const keyMap = {} as Record<string, 1>;
-        const filtered = [] as any[];
-        for (let i = 0, l = v.length; i < l; i += 1) {
-          const x = v[i];
-          if (keyMap[x] !== 1) {
-            keyMap[x] = 1;
-            filtered.push(x);
-          }
-        }
-        return filtered;
-      };
-    },
-  },
-
-  removeNilItems: {
-    sanitizer: (type?: 'undefined' | 'null' | null | 'nil') => {
-      let fn: (x: unknown) => boolean;
-      if (type === 'undefined') {
-        fn = (x) => x !== undefined;
-      } else if (type === 'null' || type === null) {
-        fn = (x) => x !== null;
-      } else {
-        // nil
-        fn = (x) => x != null;
-      }
-
-      return (v: any[]) => v.filter(fn);
-    },
-  },
+  filterItems: filterItemsDef,
+  removeDuplicateItems: removeDuplicateItemsDef,
+  removeNilItems: removeNilItemsDef,
 
   // array validators
-  minItems: {
-    validator: (min: number) => (v: any[]) => v.length >= min,
-  },
-  maxItems: {
-    validator: (max: number) => (v: any[]) => v.length <= max,
-  },
-  uniqueItems: {
-    validator: (getKey?: (x: any) => string) => {
-      if (typeof getKey === 'string') {
-        return (v: any[]) => {
-          const keyMap = {} as Record<string, 1>;
-          for (let i = 0, l = v.length; i < l; i += 1) {
-            const key = v[i][getKey];
-            if (keyMap[key] === 1) {
-              return false;
-            }
-            keyMap[key] = 1;
-          }
-          return true;
-        };
-      }
-      if (getKey) {
-        return (v: any[]) => {
-          const keyMap = {} as Record<string, 1>;
-          for (let i = 0, l = v.length; i < l; i += 1) {
-            const key = getKey(v[i]);
-            if (keyMap[key] === 1) {
-              return false;
-            }
-            keyMap[key] = 1;
-          }
-          return true;
-        };
-      }
-      return (v: any[]) => {
-        const keyMap = {} as Record<string, 1>;
-        for (let i = 0, l = v.length; i < l; i += 1) {
-          const key = v[i];
-          if (keyMap[key] === 1) {
-            return false;
-          }
-          keyMap[key] = 1;
-        }
-        return true;
-      };
-    },
-  },
-  items: {
-    validator: (rulesOrSani: SanivaliRuleInput | Sanivali, context) => {
-      const sani = isSanivali(rulesOrSani)
-        ? rulesOrSani
-        : new Sanivali(rulesOrSani, context.defs, context.path);
-
-      if (sani.async) {
-        context.rule.async = true;
-
-        return async (v: any[], opts): Promise<ISanivaliResult> => {
-          const errors = opts.errors!;
-          const path = opts.path || [];
-
-          const res = await Promise.all(
-            v.map((x, i) => sani.run(x, { ...opts, path: [...path, i] }))
-          );
-          const value = res.map((x) => x.value);
-
-          return { fatal: false, errors: errors.length ? errors : null, value };
-        };
-      }
-
-      return (v: any[], opts): ISanivaliResult => {
-        const value = v.slice();
-        const errors = opts.errors!;
-        const maxErrors = opts.maxErrors!;
-        const path = opts.path || [];
-
-        for (let i = 0, l = v.length; i < l; i += 1) {
-          value[i] = sani.runSync(v[i], { ...opts, path: [...path, i] }).value;
-          if (errors.length >= maxErrors) {
-            return { fatal: false, errors, value };
-          }
-        }
-
-        return { fatal: false, errors: errors.length ? errors : null, value };
-      };
-    },
-  },
+  minItems: minItemsDef,
+  maxItems: maxItemsDef,
+  uniqueItems: uniqueItemsDef,
+  items: itemsDef,
 
   // object sanitizer
-  filterProperties: {
-    sanitizer: (fn: (val: any, key: string) => boolean) => {
-      return (v: Record<string, any>) => {
-        const newV = { ...v };
-        const ks = Object.keys(newV);
-        for (let i = 0, l = ks.length; i < l; i += 1) {
-          const key = ks[i];
-          if (!fn(newV[key], key)) {
-            delete newV[key];
-          }
-        }
-        return newV;
-      };
-    },
-  },
-
-  deleteNilProperties: {
-    sanitizer: ({
-      type,
-      keys,
-      excludeKeys,
-    }: {
-      type?: 'undefined' | 'null' | null | 'nil' | 'empty';
-      keys?: string[];
-      excludeKeys?: string[];
-    } = {}) => {
-      let fn: (x: unknown) => boolean;
-      if (type === 'undefined') {
-        fn = (x) => x === undefined;
-      } else if (type === 'null' || type === null) {
-        fn = (x) => x === null;
-      } else if (type === 'empty') {
-        fn = isEmpty;
-      } else {
-        // nil
-        fn = (x) => x == null;
-      }
-
-      const excludeMap = {} as Record<string, 1>;
-      if (excludeKeys) {
-        for (let i = 0, l = excludeKeys.length; i < l; i += 1) {
-          excludeMap[excludeKeys[i]] = 1;
-        }
-      }
-
-      return (v: Record<string, any>) => {
-        const newV = { ...v };
-        const ks = keys || Object.keys(newV);
-        for (let i = 0, l = ks.length; i < l; i += 1) {
-          const key = ks[i];
-          if (excludeMap[key] !== 1 && fn(newV[key])) {
-            delete newV[key];
-          }
-        }
-        return newV;
-      };
-    },
-  },
+  filterProperties: filterPropertiesDef,
+  deleteNilProperties: deleteNilPropertiesDef,
 
   // object validators
-  required: {
-    validator: (keys: string[]) => (v: Record<string, any>) => {
-      for (let i = 0, l = keys.length; i < l; i += 1) {
-        const key = keys[i];
-        if (v[key] === undefined) {
-          return false;
-        }
-      }
-      return true;
-    },
-  },
-
-  minProperties: {
-    validator: (min: number) => (v: Record<string, any>) =>
-      Object.keys(v).length >= min,
-  },
-
-  maxProperties: {
-    validator: (max: number) => (v: Record<string, any>) =>
-      Object.keys(v).length <= max,
-  },
-
-  dependencies: {
-    validator: (depsMap: Record<string, string[]>) => {
-      const keys = Object.keys(depsMap);
-      return (v: Record<string, any>) => {
-        for (let i = 0, l = keys.length; i < l; i += 1) {
-          const key = keys[i];
-          if (v[key] !== undefined) {
-            const deps = depsMap[key];
-            for (let j = 0, jl = deps.length; j < jl; j += 1) {
-              if (v[deps[j]] === undefined) {
-                return false;
-              }
-            }
-          }
-        }
-        return true;
-      };
-    },
-  },
-
-  properties: {
-    validator: (
-      props: { [key: string]: SanivaliRuleInput | Sanivali },
-      context
-    ) => {
-      const keys = Object.keys(props);
-      const stringKeyMap: Record<string, 1> = {};
-      const stringKeys = [] as Array<[string, Sanivali]>;
-      const patternKeys = [] as Array<[RegExp, Sanivali]>;
-      const regexKeyPattern = /^\/.*\/i?$/;
-
-      let async = false;
-      for (let i = 0, l = keys.length; i < l; i += 1) {
-        const key = keys[i];
-        const propRules = props[key];
-
-        const sani = isSanivali(propRules)
-          ? propRules
-          : new Sanivali(propRules, context.defs, context.path);
-
-        async = async || sani.async;
-
-        if (key.length > 2 && regexKeyPattern.test(key)) {
-          // pattern key
-          if (key[key.length - 1] === 'i') {
-            patternKeys.push([
-              new RegExp(key.substring(1, key.length - 2), 'i'),
-              sani,
-            ]);
-          } else {
-            patternKeys.push([
-              new RegExp(key.substring(1, key.length - 1)),
-              sani,
-            ]);
-          }
-        } else {
-          stringKeyMap[key] = 1;
-          stringKeys.push([key, sani]);
-        }
-      }
-
-      if (async) {
-        context.rule.async = true;
-
-        return async (
-          raw: { [key: string]: any },
-          opts
-        ): Promise<ISanivaliResult> => {
-          const errors = opts.errors!;
-          const path = opts.path || [];
-
-          const promises = stringKeys.map(([key, sani]) =>
-            key in raw
-              ? sani.run(raw[key], { ...opts, path: [...path, key] })
-              : null
-          );
-
-          const vKeys = Object.keys(raw);
-          const matchedKeys = [] as string[];
-          for (let i = 0, l = vKeys.length; i < l; i += 1) {
-            const key = vKeys[i];
-            if (stringKeyMap[key] !== 1) {
-              for (let j = 0, jl = patternKeys.length; j < jl; j += 1) {
-                const [regex, sani] = patternKeys[j];
-                if (regex.test(key)) {
-                  matchedKeys.push(key);
-                  promises.push(
-                    sani.run(raw[key], { ...opts, path: [...path, key] })
-                  );
-                  break;
-                }
-              }
-            }
-          }
-
-          const results = await Promise.all(promises);
-
-          const value = { ...raw };
-          for (let i = 0, l = stringKeys.length; i < l; i += 1) {
-            const result = results[i];
-            if (result) {
-              const newPropValue = result.value;
-              const key = stringKeys[i][0];
-              if (newPropValue === undefined) {
-                delete value[key];
-              } else {
-                value[key] = newPropValue;
-              }
-            }
-          }
-          for (
-            let i = 0, l = matchedKeys.length, sl = stringKeys.length;
-            i < l;
-            i += 1
-          ) {
-            const newPropValue = results[sl + i]!.value;
-            const key = matchedKeys[i];
-            if (newPropValue === undefined) {
-              delete value[key];
-            } else {
-              value[key] = newPropValue;
-            }
-          }
-
-          return { fatal: false, errors: errors.length ? errors : null, value };
-        };
-      }
-
-      return (raw: { [key: string]: any }, opts): ISanivaliResult => {
-        const errors = opts.errors!;
-        const maxErrors = opts.maxErrors!;
-        const path = opts.path || [];
-
-        const value = { ...raw };
-        for (let i = 0, l = stringKeys.length; i < l; i += 1) {
-          const [key, sani] = stringKeys[i];
-
-          if (key in value) {
-            const res = sani.runSync(value[key], {
-              ...opts,
-              path: [...path, key],
-            });
-
-            const newPropValue = res.value;
-            if (newPropValue === undefined) {
-              delete value[key];
-            } else {
-              value[key] = newPropValue;
-            }
-
-            if (errors.length >= maxErrors) {
-              return { fatal: false, errors, value };
-            }
-          }
-        }
-
-        const vKeys = Object.keys(value);
-        for (let i = 0, l = vKeys.length; i < l; i += 1) {
-          const key = vKeys[i];
-          if (stringKeyMap[key] !== 1) {
-            for (let j = 0, jl = patternKeys.length; j < jl; j += 1) {
-              const [regex, sani] = patternKeys[j];
-              if (regex.test(key)) {
-                const res = sani.runSync(value[key], {
-                  ...opts,
-                  path: [...path, key],
-                });
-
-                const newPropValue = res.value;
-                if (newPropValue === undefined) {
-                  delete value[key];
-                } else {
-                  value[key] = newPropValue;
-                }
-
-                if (errors.length >= maxErrors) {
-                  return { fatal: false, errors, value };
-                }
-                break;
-              }
-            }
-          }
-        }
-
-        return { fatal: false, errors: errors.length ? errors : null, value };
-      };
-    },
-  },
+  required: requiredDef,
+  minProperties: minPropertiesDef,
+  maxProperties: maxPropertiesDef,
+  dependencies: dependenciesDef,
+  properties: propertiesDef,
 
   // combining
-  anyOf: {
-    validator: (conditions: Array<SanivaliRuleInput | Sanivali>, context) => {
-      let async = false;
-      const sanis = conditions.map((x) => {
-        const sani = isSanivali(x)
-          ? x
-          : new Sanivali(x, context.defs, context.path);
-        async = async || sani.async;
-        return sani;
-      });
-
-      if (async) {
-        context.rule.async = true;
-
-        return async (v, opts) => {
-          const errors = opts.errors!;
-          const maxErrors = opts.maxErrors! - errors.length;
-
-          const results = await Promise.all(
-            sanis.map((x) => x.run(v, { ...opts, errors: [], maxErrors }))
-          );
-
-          const allErrors: ISanivaliError[] = [];
-          for (let i = 0, l = results.length; i < l; i += 1) {
-            const res = results[i];
-            if (!res.errors) {
-              return { ...res, errors: errors.length ? errors : null };
-            }
-            allErrors.push(...res.errors);
-          }
-
-          errors.push(...allErrors);
-
-          return {
-            fatal: false,
-            errors: errors.length ? errors : null,
-            value: v,
-          };
-        };
-      }
-
-      return (v, opts): ISanivaliResult => {
-        const errors = opts.errors!;
-        const maxErrors = opts.maxErrors! - errors.length;
-        const allErrors: ISanivaliError[] = [];
-
-        for (let i = 0, l = sanis.length; i < l; i += 1) {
-          const res = sanis[i].runSync(v, {
-            ...opts,
-            errors: [],
-            maxErrors,
-          });
-          if (!res.errors) {
-            return { ...res, errors: errors.length ? errors : null };
-          }
-          allErrors.push(...res.errors);
-        }
-
-        errors.push(...allErrors);
-
-        return {
-          fatal: false,
-          errors: errors.length ? errors : null,
-          value: v,
-        };
-      };
-    },
-  },
+  anyOf: anyOfDef,
 
   // conditional
-  ifElse: {
-    validator: (
-      {
-        if: ifRule,
-        then: thenRule,
-        else: elseRule,
-      }: {
-        if: SanivaliRuleInput | Sanivali;
-        then?: SanivaliRuleInput | Sanivali;
-        else?: SanivaliRuleInput | Sanivali;
-      },
-      context
-    ) => {
-      const ifSani = isSanivali(ifRule)
-        ? ifRule
-        : new Sanivali(ifRule, context.defs, context.path);
-
-      const thenSani =
-        thenRule == null
-          ? null
-          : isSanivali(thenRule)
-          ? thenRule
-          : new Sanivali(thenRule, context.defs, context.path);
-
-      const elseSani =
-        elseRule == null
-          ? null
-          : isSanivali(elseRule)
-          ? elseRule
-          : new Sanivali(elseRule, context.defs, context.path);
-
-      if (
-        ifSani.async ||
-        (thenSani && thenSani.async) ||
-        (elseSani && elseSani.async)
-      ) {
-        context.rule.async = true;
-
-        return async (v, opts) => {
-          if (
-            (await ifSani.run(v, { ...opts, maxErrors: 1, errors: [] })).errors
-          ) {
-            return elseSani ? elseSani.run(v, opts) : true;
-          }
-          return thenSani ? thenSani.run(v, opts) : true;
-        };
-      }
-
-      return (v, opts) => {
-        if (ifSani.runSync(v, { ...opts, maxErrors: 1, errors: [] }).errors) {
-          return elseSani ? elseSani.runSync(v, opts) : true;
-        }
-        return thenSani ? thenSani.runSync(v, opts) : true;
-      };
-    },
-  },
+  ifElse: ifElseDef,
 };
+
+export interface ISanivaliDefaultRuleMap<T = any> {
+  // general sanitizers
+  default?: DefaultParam;
+  emptyToNull?: EmptyToNullParam;
+
+  // general validators
+  valid?: ValidParam;
+  invalid?: InvalidParam;
+  type?: TypeParam;
+  instance?: InstanceParam;
+  enum?: EnumParam;
+
+  // number sanitizers
+  parseInt?: ParseIntParam;
+  parseFloat?: ParseFloatParam;
+
+  // number validators
+  finite?: FiniteParam;
+  integer?: IntegerParam;
+  safeInteger?: SafeIntegerParam;
+  minimum?: MinimumParam;
+  exclusiveMinimum?: ExclusiveMinimumParam;
+
+  maximum?: MaximumParam;
+  exclusiveMaximum?: ExclusiveMaximumParam;
+
+  // string sanitizers
+  trim?: TrimParam;
+  trimLeft?: TrimLeftParam;
+  trimRight?: TrimRightParam;
+  trimToNull?: TrimToNullParam;
+
+  toLocaleLowerCase?: ToLocaleLowerCaseParam;
+  toLocaleUpperCase?: ToLocaleUpperCaseParam;
+  toLowerCase?: ToLowerCaseParam;
+  toUpperCase?: ToUpperCaseParam;
+
+  // string validators
+  minLength?: MinLengthParam;
+  maxLength?: MaxLengthParam;
+  pattern?: PatternParam;
+
+  // date sanitizer
+  toDate?: ToDateParam;
+  toTimestamp?: ToTimestampParam;
+
+  // array sanitizers
+  filterItems?: FilterItemsParam;
+  removeDuplicateItems?: RemoveDuplicateItemsParam;
+  removeNilItems?: RemoveNilItemsParam;
+
+  // array validators
+  minItems?: MinItemsParam;
+  maxItems?: MaxItemsParam;
+  uniqueItems?: UniqueItemsParam;
+  items?: ItemsParam<T>;
+
+  // object sanitizer
+  filterProperties?: FilterPropertiesParam;
+  deleteNilProperties?: DeleteNilPropertiesParam;
+
+  // object validators
+  required?: RequiredParam;
+  minProperties?: MinPropertiesParam;
+  maxProperties?: MaxPropertiesParam;
+  dependencies?: DependenciesParam;
+  properties?: PropertiesParam<T>;
+
+  // combining
+  anyOf?: AnyOfParam<T>;
+
+  // conditional
+  ifElse?: IfElseParam<T>;
+}
+
+export type SanivaliDefaultRuleItem<T = any> =
+  // general sanitizers
+  | DefaultRuleItem
+  | EmptyToNullRuleItem
+
+  // general validators
+  | ValidRuleItem
+  | InvalidRuleItem
+  | TypeRuleItem
+  | InstanceRuleItem
+  | EnumRuleItem
+
+  // number sanitizers
+  | ParseIntRuleItem
+  | ParseFloatRuleItem
+
+  // number validators
+  | FiniteRuleItem
+  | IntegerRuleItem
+  | SafeIntegerRuleItem
+  | MinimumRuleItem
+  | ExclusiveMinimumRuleItem
+  | MaximumRuleItem
+  | ExclusiveMaximumRuleItem
+
+  // string sanitizers
+  | TrimRuleItem
+  | TrimLeftRuleItem
+  | TrimRightRuleItem
+  | TrimToNullRuleItem
+  | ToLocaleLowerCaseRuleItem
+  | ToLocaleUpperCaseRuleItem
+  | ToLowerCaseRuleItem
+  | ToUpperCaseRuleItem
+
+  // string validators
+  | MinLengthRuleItem
+  | MaxLengthRuleItem
+  | PatternRuleItem
+
+  // date sanitizer
+  | ToDateRuleItem
+  | ToTimestampRuleItem
+
+  // array sanitizers
+  | FilterItemsRuleItem
+  | RemoveDuplicateItemsRuleItem
+  | RemoveNilItemsRuleItem
+
+  // array validators
+  | MinItemsRuleItem
+  | MaxItemsRuleItem
+  | UniqueItemsRuleItem
+  | ItemsRuleItem<T>
+
+  // object sanitizer
+  | FilterPropertiesRuleItem
+  | DeleteNilPropertiesRuleItem
+
+  // object validators
+  | RequiredRuleItem
+  | MinPropertiesRuleItem
+  | MaxPropertiesRuleItem
+  | DependenciesRuleItem
+  | PropertiesRuleItem<T>
+
+  // combining
+  | AnyOfRuleItem<T>
+
+  // conditional
+  | IfElseRuleItem<T>;
+
+export type SanivaliDefaultRuleSchema<T = any> =
+  | ISanivaliDefaultRuleMap<T>
+  | SanivaliDefaultRuleItem<T>;

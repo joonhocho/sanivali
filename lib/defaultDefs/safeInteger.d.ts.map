@@ -1,0 +1,1 @@
+{"version":3,"file":"safeInteger.d.ts","sourceRoot":"","sources":["../../src/defaultDefs/safeInteger.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,YAAY,CAAC;AAE1C,oBAAY,gBAAgB,GAAG,OAAO,GAAG,SAAS,CAAC;AAEnD,oBAAY,mBAAmB,GAC3B,aAAa,GACb,CAAC,aAAa,EAAE,gBAAgB,CAAC,CAAC,CAAC;AAIvC,eAAO,MAAM,cAAc,EAAE,YAa5B,CAAC"}

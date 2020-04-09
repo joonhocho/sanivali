@@ -1,0 +1,1 @@
+{"version":3,"file":"dependencies.d.ts","sourceRoot":"","sources":["../../src/defaultDefs/dependencies.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,YAAY,CAAC;AAE1C,oBAAY,iBAAiB,GAAG,MAAM,CAAC,MAAM,EAAE,MAAM,EAAE,CAAC,CAAC;AAEzD,oBAAY,oBAAoB,GAAG,CAAC,cAAc,EAAE,iBAAiB,CAAC,CAAC;AAEvE,eAAO,MAAM,eAAe,EAAE,YAmB7B,CAAC"}
