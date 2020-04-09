@@ -43,6 +43,9 @@ export const defaultDefs: ISanivaliDefMap = {
   },
 
   // general validators
+  valid: {
+    validator: () => () => true,
+  },
   invalid: {
     validator: () => () => false,
   },
@@ -541,17 +544,19 @@ export const defaultDefs: ISanivaliDefMap = {
         context.rule.async = true;
 
         return async (
-          v: { [key: string]: any },
+          raw: { [key: string]: any },
           opts
         ): Promise<ISanivaliResult> => {
           const errors = opts.errors!;
           const path = opts.path || [];
 
           const promises = stringKeys.map(([key, sani]) =>
-            sani.run(v[key], { ...opts, path: [...path, key] })
+            key in raw
+              ? sani.run(raw[key], { ...opts, path: [...path, key] })
+              : null
           );
 
-          const vKeys = Object.keys(v);
+          const vKeys = Object.keys(raw);
           const matchedKeys = [] as string[];
           for (let i = 0, l = vKeys.length; i < l; i += 1) {
             const key = vKeys[i];
@@ -561,7 +566,7 @@ export const defaultDefs: ISanivaliDefMap = {
                 if (regex.test(key)) {
                   matchedKeys.push(key);
                   promises.push(
-                    sani.run(v[key], { ...opts, path: [...path, key] })
+                    sani.run(raw[key], { ...opts, path: [...path, key] })
                   );
                   break;
                 }
@@ -571,51 +576,83 @@ export const defaultDefs: ISanivaliDefMap = {
 
           const results = await Promise.all(promises);
 
-          const value = { ...v };
+          const value = { ...raw };
           for (let i = 0, l = stringKeys.length; i < l; i += 1) {
-            value[stringKeys[i][0]] = results[i].value;
+            const result = results[i];
+            if (result) {
+              const newPropValue = result.value;
+              const key = stringKeys[i][0];
+              if (newPropValue === undefined) {
+                delete value[key];
+              } else {
+                value[key] = newPropValue;
+              }
+            }
           }
           for (
             let i = 0, l = matchedKeys.length, sl = stringKeys.length;
             i < l;
             i += 1
           ) {
-            value[matchedKeys[i]] = results[sl + i].value;
+            const newPropValue = results[sl + i]!.value;
+            const key = matchedKeys[i];
+            if (newPropValue === undefined) {
+              delete value[key];
+            } else {
+              value[key] = newPropValue;
+            }
           }
 
           return { fatal: false, errors: errors.length ? errors : null, value };
         };
       }
 
-      return (v: { [key: string]: any }, opts): ISanivaliResult => {
+      return (raw: { [key: string]: any }, opts): ISanivaliResult => {
         const errors = opts.errors!;
         const maxErrors = opts.maxErrors!;
         const path = opts.path || [];
 
-        const value = { ...v };
+        const value = { ...raw };
         for (let i = 0, l = stringKeys.length; i < l; i += 1) {
           const [key, sani] = stringKeys[i];
 
-          const res = sani.runSync(v[key], { ...opts, path: [...path, key] });
-          value[key] = res.value;
+          if (key in value) {
+            const res = sani.runSync(value[key], {
+              ...opts,
+              path: [...path, key],
+            });
 
-          if (errors.length >= maxErrors) {
-            return { fatal: false, errors, value };
+            const newPropValue = res.value;
+            if (newPropValue === undefined) {
+              delete value[key];
+            } else {
+              value[key] = newPropValue;
+            }
+
+            if (errors.length >= maxErrors) {
+              return { fatal: false, errors, value };
+            }
           }
         }
 
-        const vKeys = Object.keys(v);
+        const vKeys = Object.keys(value);
         for (let i = 0, l = vKeys.length; i < l; i += 1) {
           const key = vKeys[i];
           if (stringKeyMap[key] !== 1) {
             for (let j = 0, jl = patternKeys.length; j < jl; j += 1) {
               const [regex, sani] = patternKeys[j];
               if (regex.test(key)) {
-                const res = sani.runSync(v[key], {
+                const res = sani.runSync(value[key], {
                   ...opts,
                   path: [...path, key],
                 });
-                value[key] = res.value;
+
+                const newPropValue = res.value;
+                if (newPropValue === undefined) {
+                  delete value[key];
+                } else {
+                  value[key] = newPropValue;
+                }
 
                 if (errors.length >= maxErrors) {
                   return { fatal: false, errors, value };

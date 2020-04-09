@@ -11,7 +11,13 @@ test('properties', async () => {
     },
   });
 
-  expect(sani.run({ int: '2', name: '   name ' })).toEqual({
+  expect(sani.run({})).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: {},
+  });
+
+  expect(sani.run({ int: '2', name: '   name ' })).toStrictEqual({
     fatal: false,
     errors: null,
     value: { int: 2, name: 'name' },
@@ -26,13 +32,21 @@ test('properties', async () => {
     ],
   ]);
 
-  expect(sani.run({ int: '2', name: 3 }, { maxErrors: 100 })).toEqual({
+  expect(sani.run({ int: '2', name: 3 }, { maxErrors: 100 })).toStrictEqual({
+    fatal: false,
+    errors: [{ param: 'string', path: ['name'], type: 'type', value: 3 }],
+    value: { int: 2, name: 3 },
+  });
+
+  expect(
+    sani.run({ int: '2', name: 3, bool: undefined }, { maxErrors: 100 })
+  ).toStrictEqual({
     fatal: false,
     errors: [
       { param: 'string', path: ['name'], type: 'type', value: 3 },
       { param: 'boolean', path: ['bool'], type: 'type', value: undefined },
     ],
-    value: { bool: undefined, int: 2, name: 3 },
+    value: { int: 2, name: 3 },
   });
 
   sani.addDef('minAsync', {
@@ -49,14 +63,15 @@ test('properties', async () => {
     ],
   ]);
 
-  expect(await sani.run({ int: '2', name: 3 }, { maxErrors: 100 })).toEqual({
+  expect(
+    await sani.run({ int: '2', name: 3 }, { maxErrors: 100 })
+  ).toStrictEqual({
     fatal: false,
     errors: [
       { param: 'string', path: ['name'], type: 'type', value: 3 },
-      { param: 'boolean', path: ['bool'], type: 'type', value: undefined },
       { param: 3, path: ['int'], type: 'minAsync', value: 2 },
     ],
-    value: { bool: undefined, int: 2, name: 3 },
+    value: { int: 2, name: 3 },
   });
 
   expect(
@@ -64,7 +79,7 @@ test('properties', async () => {
       { int: '100', name: ' hello world ', bool: true },
       { maxErrors: 100 }
     )
-  ).toEqual({
+  ).toStrictEqual({
     fatal: false,
     errors: null,
     value: { int: 100, name: 'hello world', bool: true },
@@ -82,49 +97,57 @@ test('properties pattern', async () => {
     },
   });
 
-  expect(sani.run({})).toEqual({
-    errors: [{ param: 'string', path: ['a'], type: 'type', value: undefined }],
+  expect(sani.run({})).toStrictEqual({
+    errors: null,
     fatal: false,
-    value: { a: undefined },
+    value: {},
   });
 
-  expect(sani.run({ a: '' })).toEqual({
+  expect(sani.run({ a: undefined })).toStrictEqual({
+    errors: [{ param: 'string', path: ['a'], type: 'type', value: undefined }],
+    fatal: false,
+    value: {},
+  });
+
+  expect(sani.run({ a: '' })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '' },
   });
 
-  expect(sani.run({ a: '', n: '1' })).toEqual({
+  expect(sani.run({ a: '', n: '1' })).toStrictEqual({
     errors: [{ param: 'number', path: ['n'], type: 'type', value: '1' }],
     fatal: false,
     value: { a: '', n: '1' },
   });
 
-  expect(sani.run({ a: '', n: 1 })).toEqual({
+  expect(sani.run({ a: '', n: 1 })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '', n: 1 },
   });
 
-  expect(sani.run({ a: '', n: 1, b: 1 })).toEqual({
+  expect(sani.run({ a: '', n: 1, b: 1 })).toStrictEqual({
     errors: [{ param: 'boolean', path: ['b'], type: 'type', value: 1 }],
     fatal: false,
     value: { a: '', b: 1, n: 1 },
   });
 
-  expect(sani.run({ a: '', n: 1, b: false })).toEqual({
+  expect(sani.run({ a: '', n: 1, b: false })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '', b: false, n: 1 },
   });
 
-  expect(sani.run({ a: '', n1: 1, B1: false, a1: 3 })).toEqual({
+  expect(sani.run({ a: '', n1: 1, B1: false, a1: 3 })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '', n1: 1, B1: false, a1: 3 },
   });
 
-  expect(sani.run({ a: '', n1: 1, b1: false, a1: 3, invalidkey: 1 })).toEqual({
+  expect(
+    sani.run({ a: '', n1: 1, b1: false, a1: 3, invalidkey: 1 })
+  ).toStrictEqual({
     errors: [
       { param: undefined, path: ['invalidkey'], type: 'invalid', value: 1 },
     ],
@@ -138,6 +161,7 @@ test('properties pattern', async () => {
     {
       properties: {
         a: { type: 'string' },
+        c: { typeAsync: 'number' },
         '/^n/': { typeAsync: 'number' },
         '/^b/i': { typeAsync: 'boolean' },
         '/^a/': [],
@@ -152,43 +176,57 @@ test('properties pattern', async () => {
     }
   );
 
-  expect(await sani.run({})).toEqual({
-    errors: [{ param: 'string', path: ['a'], type: 'type', value: undefined }],
+  expect(await sani.run({})).toStrictEqual({
+    errors: null,
     fatal: false,
-    value: { a: undefined },
+    value: {},
   });
 
-  expect(await sani.run({ a: '' })).toEqual({
+  expect(await sani.run({ a: undefined })).toStrictEqual({
+    errors: [{ param: 'string', path: ['a'], type: 'type', value: undefined }],
+    fatal: false,
+    value: {},
+  });
+
+  expect(await sani.run({ c: undefined })).toStrictEqual({
+    errors: [
+      { param: 'number', path: ['c'], type: 'typeAsync', value: undefined },
+    ],
+    fatal: false,
+    value: {},
+  });
+
+  expect(await sani.run({ a: '' })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '' },
   });
 
-  expect(await sani.run({ a: '', n: '1' })).toEqual({
+  expect(await sani.run({ a: '', n: '1' })).toStrictEqual({
     errors: [{ param: 'number', path: ['n'], type: 'typeAsync', value: '1' }],
     fatal: false,
     value: { a: '', n: '1' },
   });
 
-  expect(await sani.run({ a: '', n: 1 })).toEqual({
+  expect(await sani.run({ a: '', n: 1 })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '', n: 1 },
   });
 
-  expect(await sani.run({ a: '', n: 1, b: 1 })).toEqual({
+  expect(await sani.run({ a: '', n: 1, b: 1 })).toStrictEqual({
     errors: [{ param: 'boolean', path: ['b'], type: 'typeAsync', value: 1 }],
     fatal: false,
     value: { a: '', b: 1, n: 1 },
   });
 
-  expect(await sani.run({ a: '', n: 1, b: false })).toEqual({
+  expect(await sani.run({ a: '', n: 1, b: false })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '', b: false, n: 1 },
   });
 
-  expect(await sani.run({ a: '', n1: 1, B1: false, a1: 3 })).toEqual({
+  expect(await sani.run({ a: '', n1: 1, B1: false, a1: 3 })).toStrictEqual({
     errors: null,
     fatal: false,
     value: { a: '', n1: 1, B1: false, a1: 3 },
@@ -196,11 +234,38 @@ test('properties pattern', async () => {
 
   expect(
     await sani.run({ a: '', n1: 1, b1: false, a1: 3, invalidkey: 1 })
-  ).toEqual({
+  ).toStrictEqual({
     errors: [
       { param: undefined, path: ['invalidkey'], type: 'invalid', value: 1 },
     ],
     fatal: false,
     value: { a: '', a1: 3, b1: false, invalidkey: 1, n1: 1 },
+  });
+});
+
+test('properties delete undefined props', async () => {
+  const sani = new Sanivali({
+    properties: {
+      a: { type: 'undefined' },
+      '/.*/': ['valid'],
+    },
+  });
+
+  expect(await sani.run({})).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: {},
+  });
+
+  expect(await sani.run({ a: undefined })).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: {},
+  });
+
+  expect(await sani.run({ b: null, c: undefined })).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: { b: null },
   });
 });
