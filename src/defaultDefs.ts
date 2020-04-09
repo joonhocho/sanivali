@@ -177,6 +177,21 @@ export const defaultDefs: ISanivaliDefMap = {
     },
   },
 
+  toLocaleLowerCase: {
+    sanitizer: (locales?: string | string[]) => (x: string) =>
+      x.toLocaleLowerCase(locales),
+  },
+  toLocaleUpperCase: {
+    sanitizer: (locales?: string | string[]) => (x: string) =>
+      x.toLocaleUpperCase(locales),
+  },
+  toLowerCase: {
+    sanitizer: () => (x: string) => x.toLowerCase(),
+  },
+  toUpperCase: {
+    sanitizer: () => (x: string) => x.toUpperCase(),
+  },
+
   // string validators
   minLength: {
     validator: (min: number) => (v) => v.length >= min,
@@ -188,6 +203,22 @@ export const defaultDefs: ISanivaliDefMap = {
     validator: (pattern: string | RegExp) => {
       const reg = typeof pattern === 'string' ? new RegExp(pattern) : pattern;
       return (v) => reg.test(v);
+    },
+  },
+
+  // date sanitizer
+  toDate: {
+    sanitizer: () => (x: number | string | Date): Date | null => {
+      const date = new Date(x);
+      const t = date.getTime();
+      return t === t ? date : null;
+    },
+  },
+  toTimestamp: {
+    sanitizer: () => (x: number | string | Date): number | null => {
+      const date = new Date(x);
+      const t = date.getTime();
+      return t === t ? t : null;
     },
   },
 
