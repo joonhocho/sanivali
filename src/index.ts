@@ -85,6 +85,11 @@ export {
   FilterPropertiesRuleItem,
   filterPropertiesDef,
 } from './defaultDefs/filterProperties';
+export {
+  FilterUniqueItemsParam,
+  FilterUniqueItemsRuleItem,
+  filterUniqueItemsDef,
+} from './defaultDefs/filterUniqueItems';
 export { FiniteParam, FiniteRuleItem, finiteDef } from './defaultDefs/finite';
 export { IfElseParam, IfElseRuleItem, ifElseDef } from './defaultDefs/ifElse';
 export {

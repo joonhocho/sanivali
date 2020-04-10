@@ -13,6 +13,7 @@ export { ExclusiveMaximumParam, ExclusiveMaximumRuleItem, exclusiveMaximumDef, }
 export { ExclusiveMinimumParam, ExclusiveMinimumRuleItem, exclusiveMinimumDef, } from './defaultDefs/exclusiveMinimum';
 export { FilterItemsParam, FilterItemsRuleItem, filterItemsDef, } from './defaultDefs/filterItems';
 export { FilterPropertiesParam, FilterPropertiesRuleItem, filterPropertiesDef, } from './defaultDefs/filterProperties';
+export { FilterUniqueItemsParam, FilterUniqueItemsRuleItem, filterUniqueItemsDef, } from './defaultDefs/filterUniqueItems';
 export { FiniteParam, FiniteRuleItem, finiteDef } from './defaultDefs/finite';
 export { IfElseParam, IfElseRuleItem, ifElseDef } from './defaultDefs/ifElse';
 export { InstanceParam, InstanceRuleItem, instanceDef, } from './defaultDefs/instance';

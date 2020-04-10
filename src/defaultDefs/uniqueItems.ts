@@ -1,6 +1,10 @@
 import { ISanivaliDef } from '_src/types';
 
-export type UniqueItemsParam = string | ((x: any) => string) | undefined;
+export type UniqueItemsParam =
+  | boolean
+  | string
+  | ((x: any) => string)
+  | undefined;
 
 export type UniqueItemsRuleItem =
   | 'uniqueItems'
@@ -8,6 +12,8 @@ export type UniqueItemsRuleItem =
 
 export const uniqueItemsDef: ISanivaliDef = {
   validator: (getKey?: UniqueItemsParam) => {
+    if (getKey === false) return null;
+
     if (typeof getKey === 'string') {
       return (v: any[]) => {
         const keyMap = {} as Record<string, 1>;
@@ -22,7 +28,7 @@ export const uniqueItemsDef: ISanivaliDef = {
       };
     }
 
-    if (getKey) {
+    if (typeof getKey === 'function') {
       return (v: any[]) => {
         const keyMap = {} as Record<string, 1>;
         for (let i = 0, l = v.length; i < l; i += 1) {

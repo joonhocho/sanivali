@@ -41,6 +41,11 @@ import {
   FilterItemsRuleItem,
 } from './defaultDefs/filterItems';
 import {
+  filterUniqueItemsDef,
+  FilterUniqueItemsParam,
+  FilterUniqueItemsRuleItem,
+} from './defaultDefs/filterUniqueItems';
+import {
   filterPropertiesDef,
   FilterPropertiesParam,
   FilterPropertiesRuleItem,
@@ -247,6 +252,7 @@ export const defaultDefs: ISanivaliDefMap = {
 
   // array sanitizers
   filterItems: filterItemsDef,
+  filterUniqueItems: filterUniqueItemsDef,
   removeDuplicateItems: removeDuplicateItemsDef,
   removeNilItems: removeNilItemsDef,
 
@@ -324,6 +330,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
 
   // array sanitizers
   filterItems?: FilterItemsParam;
+  filterUniqueItems?: FilterUniqueItemsParam;
   removeDuplicateItems?: RemoveDuplicateItemsParam;
   removeNilItems?: RemoveNilItemsParam;
 
@@ -399,6 +406,7 @@ export type SanivaliDefaultRuleItem<T = any> =
 
   // array sanitizers
   | FilterItemsRuleItem
+  | FilterUniqueItemsRuleItem
   | RemoveDuplicateItemsRuleItem
   | RemoveNilItemsRuleItem
 
