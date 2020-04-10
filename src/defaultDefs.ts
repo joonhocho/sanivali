@@ -41,15 +41,15 @@ import {
   FilterItemsRuleItem,
 } from './defaultDefs/filterItems';
 import {
-  filterUniqueItemsDef,
-  FilterUniqueItemsParam,
-  FilterUniqueItemsRuleItem,
-} from './defaultDefs/filterUniqueItems';
-import {
   filterPropertiesDef,
   FilterPropertiesParam,
   FilterPropertiesRuleItem,
 } from './defaultDefs/filterProperties';
+import {
+  filterUniqueItemsDef,
+  FilterUniqueItemsParam,
+  FilterUniqueItemsRuleItem,
+} from './defaultDefs/filterUniqueItems';
 import { finiteDef, FiniteParam, FiniteRuleItem } from './defaultDefs/finite';
 import { ifElseDef, IfElseParam, IfElseRuleItem } from './defaultDefs/ifElse';
 import {
@@ -109,6 +109,11 @@ import {
   MinPropertiesRuleItem,
 } from './defaultDefs/minProperties';
 import {
+  notEmptyDef,
+  NotEmptyParam,
+  NotEmptyRuleItem,
+} from './defaultDefs/notEmpty';
+import {
   parseFloatDef,
   ParseFloatParam,
   ParseFloatRuleItem,
@@ -143,11 +148,6 @@ import {
   RequiredParam,
   RequiredRuleItem,
 } from './defaultDefs/required';
-import {
-  notEmptyDef,
-  NotEmptyParam,
-  NotEmptyRuleItem,
-} from './defaultDefs/notEmpty';
 import {
   safeIntegerDef,
   SafeIntegerParam,
@@ -203,6 +203,8 @@ import {
 } from './defaultDefs/uniqueItems';
 import { validDef, ValidParam, ValidRuleItem } from './defaultDefs/valid';
 import { ISanivaliDefMap } from './types';
+
+import type { Sanivali } from './sanivali';
 
 export const defaultDefs: ISanivaliDefMap = {
   // general sanitizers
@@ -437,4 +439,4 @@ export type SanivaliDefaultRuleItem<T = any> =
 
 export type SanivaliDefaultRuleSchema<T = any> =
   | ISanivaliDefaultRuleMap<T>
-  | Array<SanivaliDefaultRuleItem<T>>;
+  | Array<SanivaliDefaultRuleItem<T> | Sanivali<any, any>>;

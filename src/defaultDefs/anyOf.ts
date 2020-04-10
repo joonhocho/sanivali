@@ -15,9 +15,7 @@ export const anyOfDef: ISanivaliDef = {
   validator: (conditions: AnyOfParam, context) => {
     let async = false;
     const sanis = conditions.map((x) => {
-      const sani = isSanivali(x)
-        ? x
-        : new Sanivali(x as any, context.defs, context.path);
+      const sani = isSanivali(x) ? x : new Sanivali(x as any, context.defs);
       async = async || sani.async;
       return sani;
     });

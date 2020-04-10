@@ -1,7 +1,15 @@
+import { SanivaliDefaultRuleSchema } from '_src/defaultDefs';
+
 import { Sanivali } from './sanivali';
 
 test('Sanivali addDef / async / skipSanitize / skipValidate', async () => {
-  const sani = new Sanivali();
+  const sani = new Sanivali<any, SanivaliDefaultRuleSchema>([], {
+    minAsync: {
+      validator: (min) => (v) => Promise.resolve(v >= min),
+      async: true,
+    },
+  });
+
   const saniMinAsync = new Sanivali([['minAsync', 3]], {
     minAsync: {
       validator: (min) => (v) => Promise.resolve(v >= min),
@@ -16,7 +24,8 @@ test('Sanivali addDef / async / skipSanitize / skipValidate', async () => {
     },
   });
 
-  sani.addRule({ parseInt: true, minAsync: saniMinAsync } as any);
+  sani.addRule({ parseInt: true } as any);
+  sani.addRule([saniMinAsync]);
 
   expect(sani.run(2)).toBeInstanceOf(Promise);
 

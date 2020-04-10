@@ -1,14 +1,13 @@
 import { SanivaliDefaultRuleSchema } from './defaultDefs';
-import { ISanivaliDef, ISanivaliDefMap, ISanivaliResult, ISanivaliRunOptions, PropPath } from './types';
+import { ISanivaliDef, ISanivaliDefMap, ISanivaliResult, ISanivaliRunOptions } from './types';
 export declare class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
-    path?: PropPath | undefined;
     static is: (x: unknown) => x is Sanivali<any, SanivaliDefaultRuleSchema<any>>;
     isSanivali: boolean;
     private rules;
     async: boolean;
     private defs;
     runOnNil: boolean;
-    constructor(rules?: Schema, defs?: ISanivaliDefMap, path?: PropPath | undefined);
+    constructor(rules?: Schema, defs?: ISanivaliDefMap);
     addDefs(defs: ISanivaliDefMap): Sanivali<T, Schema>;
     addDef(type: string, def: ISanivaliDef): Sanivali<T, Schema>;
     removeDef(type: string): Sanivali<T, Schema>;

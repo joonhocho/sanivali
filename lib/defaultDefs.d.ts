@@ -8,8 +8,8 @@ import { EnumParam, EnumRuleItem } from './defaultDefs/enum';
 import { ExclusiveMaximumParam, ExclusiveMaximumRuleItem } from './defaultDefs/exclusiveMaximum';
 import { ExclusiveMinimumParam, ExclusiveMinimumRuleItem } from './defaultDefs/exclusiveMinimum';
 import { FilterItemsParam, FilterItemsRuleItem } from './defaultDefs/filterItems';
-import { FilterUniqueItemsParam, FilterUniqueItemsRuleItem } from './defaultDefs/filterUniqueItems';
 import { FilterPropertiesParam, FilterPropertiesRuleItem } from './defaultDefs/filterProperties';
+import { FilterUniqueItemsParam, FilterUniqueItemsRuleItem } from './defaultDefs/filterUniqueItems';
 import { FiniteParam, FiniteRuleItem } from './defaultDefs/finite';
 import { IfElseParam, IfElseRuleItem } from './defaultDefs/ifElse';
 import { InstanceParam, InstanceRuleItem } from './defaultDefs/instance';
@@ -24,6 +24,7 @@ import { MinimumParam, MinimumRuleItem } from './defaultDefs/minimum';
 import { MinItemsParam, MinItemsRuleItem } from './defaultDefs/minItems';
 import { MinLengthParam, MinLengthRuleItem } from './defaultDefs/minLength';
 import { MinPropertiesParam, MinPropertiesRuleItem } from './defaultDefs/minProperties';
+import { NotEmptyParam, NotEmptyRuleItem } from './defaultDefs/notEmpty';
 import { ParseFloatParam, ParseFloatRuleItem } from './defaultDefs/parseFloat';
 import { ParseIntParam, ParseIntRuleItem } from './defaultDefs/parseInt';
 import { PatternParam, PatternRuleItem } from './defaultDefs/pattern';
@@ -31,7 +32,6 @@ import { PropertiesParam, PropertiesRuleItem } from './defaultDefs/properties';
 import { RemoveDuplicateItemsParam, RemoveDuplicateItemsRuleItem } from './defaultDefs/removeDuplicateItems';
 import { RemoveNilItemsParam, RemoveNilItemsRuleItem } from './defaultDefs/removeNilItems';
 import { RequiredParam, RequiredRuleItem } from './defaultDefs/required';
-import { NotEmptyParam, NotEmptyRuleItem } from './defaultDefs/notEmpty';
 import { SafeIntegerParam, SafeIntegerRuleItem } from './defaultDefs/safeInteger';
 import { ToDateParam, ToDateRuleItem } from './defaultDefs/toDate';
 import { ToLocaleLowerCaseParam, ToLocaleLowerCaseRuleItem } from './defaultDefs/toLocaleLowerCase';
@@ -47,6 +47,7 @@ import { TypeParam, TypeRuleItem } from './defaultDefs/type';
 import { UniqueItemsParam, UniqueItemsRuleItem } from './defaultDefs/uniqueItems';
 import { ValidParam, ValidRuleItem } from './defaultDefs/valid';
 import { ISanivaliDefMap } from './types';
+import type { Sanivali } from './sanivali';
 export declare const defaultDefs: ISanivaliDefMap;
 export interface ISanivaliDefaultRuleMap<T = any> {
     default?: DefaultParam;
@@ -99,5 +100,5 @@ export interface ISanivaliDefaultRuleMap<T = any> {
     ifElse?: IfElseParam<T>;
 }
 export declare type SanivaliDefaultRuleItem<T = any> = DefaultRuleItem | EmptyToNullRuleItem | ValidRuleItem | InvalidRuleItem | TypeRuleItem | InstanceRuleItem | EnumRuleItem | ParseIntRuleItem | ParseFloatRuleItem | FiniteRuleItem | IntegerRuleItem | SafeIntegerRuleItem | MinimumRuleItem | ExclusiveMinimumRuleItem | MaximumRuleItem | ExclusiveMaximumRuleItem | TrimRuleItem | TrimLeftRuleItem | TrimRightRuleItem | TrimToNullRuleItem | ToLocaleLowerCaseRuleItem | ToLocaleUpperCaseRuleItem | ToLowerCaseRuleItem | ToUpperCaseRuleItem | MinLengthRuleItem | MaxLengthRuleItem | PatternRuleItem | ToDateRuleItem | ToTimestampRuleItem | FilterItemsRuleItem | FilterUniqueItemsRuleItem | RemoveDuplicateItemsRuleItem | RemoveNilItemsRuleItem | MinItemsRuleItem | MaxItemsRuleItem | UniqueItemsRuleItem | ItemsRuleItem<T> | DefaultPropertiesRuleItem | FilterPropertiesRuleItem | DeleteNilPropertiesRuleItem | RequiredRuleItem | NotEmptyRuleItem | MinPropertiesRuleItem | MaxPropertiesRuleItem | DependenciesRuleItem | PropertiesRuleItem<T> | AnyOfRuleItem<T> | IfElseRuleItem<T>;
-export declare type SanivaliDefaultRuleSchema<T = any> = ISanivaliDefaultRuleMap<T> | Array<SanivaliDefaultRuleItem<T>>;
+export declare type SanivaliDefaultRuleSchema<T = any> = ISanivaliDefaultRuleMap<T> | Array<SanivaliDefaultRuleItem<T> | Sanivali<any, any>>;
 //# sourceMappingURL=defaultDefs.d.ts.map

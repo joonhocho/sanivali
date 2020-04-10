@@ -22,21 +22,21 @@ export const ifElseDef: ISanivaliDef = {
   ) => {
     const ifSani = isSanivali(ifRule)
       ? ifRule
-      : new Sanivali(ifRule as any, context.defs, context.path);
+      : new Sanivali(ifRule as any, context.defs);
 
     const thenSani =
       thenRule == null
         ? null
         : isSanivali(thenRule)
         ? thenRule
-        : new Sanivali(thenRule as any, context.defs, context.path);
+        : new Sanivali(thenRule as any, context.defs);
 
     const elseSani =
       elseRule == null
         ? null
         : isSanivali(elseRule)
         ? elseRule
-        : new Sanivali(elseRule as any, context.defs, context.path);
+        : new Sanivali(elseRule as any, context.defs);
 
     if (
       ifSani.async ||

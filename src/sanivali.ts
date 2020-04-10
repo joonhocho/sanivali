@@ -6,7 +6,6 @@ import {
   ISanivaliDefMap,
   ISanivaliResult,
   ISanivaliRunOptions,
-  PropPath,
   ValidationResult,
 } from './types';
 import { isSanivali } from './util';
@@ -20,7 +19,7 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
   private defs: ISanivaliDefMap = defaultDefs;
   public runOnNil = false;
 
-  constructor(rules?: Schema, defs?: ISanivaliDefMap, public path?: PropPath) {
+  constructor(rules?: Schema, defs?: ISanivaliDefMap) {
     if (defs) this.addDefs(defs);
     if (rules) this.addRule(rules);
   }
@@ -42,21 +41,21 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
   }
 
   addRule(items: Schema): Sanivali<T, Schema> {
-    const { defs, rules, path } = this;
+    const { defs, rules } = this;
     const ruleItems: Array<[string, any] | Sanivali> = [];
 
     if (Array.isArray(items)) {
       for (let i = 0, l = items.length; i < l; i += 1) {
-        const rule = items[i];
-        if (isSanivali(rule)) {
-          ruleItems.push(rule);
+        const item = items[i];
+        if (isSanivali(item)) {
+          ruleItems.push(item);
         } else {
           let type: string;
           let param: any;
-          if (typeof rule === 'string') {
-            type = rule;
+          if (typeof item === 'string') {
+            type = item;
           } else {
-            [type, param] = rule;
+            [type, param] = item;
           }
           ruleItems.push([type, param]);
         }
@@ -65,8 +64,7 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
       const types = Object.keys(items) as Array<keyof typeof items & string>;
       for (let i = 0, l = types.length; i < l; i += 1) {
         const type = types[i];
-        const param = items[type];
-        ruleItems.push(isSanivali(param) ? param : [type, param]);
+        ruleItems.push([type, items[type]]);
       }
     }
 
@@ -103,7 +101,7 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
         }
 
         const context: ISanivaliBuildContext = {
-          path,
+          path: undefined,
           defs,
           rule: compiled,
         };
@@ -138,7 +136,7 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
   runSync(val: T, opts: ISanivaliRunOptions = {}): ISanivaliResult {
     const { rules } = this;
     const {
-      path = this.path,
+      path,
       errors = [],
       maxErrors = 1,
       skipSanitize,
@@ -213,7 +211,7 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
   ): Promise<ISanivaliResult> {
     const { rules } = this;
     const {
-      path = this.path,
+      path,
       errors = [],
       maxErrors = 1,
       skipSanitize,

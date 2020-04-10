@@ -1,7 +1,11 @@
 import { Sanivali } from '../sanivali';
+import { SanivaliDefaultRuleSchema } from '_src/defaultDefs';
 
 test('items', async () => {
-  const sani = new Sanivali([['items', ['parseInt']]]);
+  const sani = new Sanivali<any[], SanivaliDefaultRuleSchema>({
+    type: 'array',
+    items: { parseInt: true },
+  });
 
   expect(sani.run(['1', 2, '3.5'])).toStrictEqual({
     fatal: false,
@@ -38,5 +42,27 @@ test('items', async () => {
       { param: 3, path: [1], type: 'minAsync', value: 2 },
     ],
     value: [1, 2, 3],
+  });
+});
+
+test('items sani', async () => {
+  const sani = new Sanivali<any[], SanivaliDefaultRuleSchema>({
+    type: 'array',
+    items: new Sanivali({ type: 'number' }),
+  });
+
+  expect(sani.run(['1', 2, '3.5'], { maxErrors: 100 })).toStrictEqual({
+    errors: [
+      { param: 'number', path: [0], type: 'type', value: '1' },
+      { param: 'number', path: [2], type: 'type', value: '3.5' },
+    ],
+    fatal: false,
+    value: ['1', 2, '3.5'],
+  });
+
+  expect(sani.run([1, 2, 3.5])).toStrictEqual({
+    errors: null,
+    fatal: false,
+    value: [1, 2, 3.5],
   });
 });

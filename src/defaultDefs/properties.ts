@@ -28,7 +28,7 @@ export const propertiesDef: ISanivaliDef = {
 
       const sani = isSanivali(propRules)
         ? propRules
-        : new Sanivali(propRules as any, context.defs, context.path);
+        : new Sanivali(propRules as any, context.defs);
 
       async = async || sani.async;
 

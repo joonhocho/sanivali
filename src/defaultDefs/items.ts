@@ -15,7 +15,7 @@ export const itemsDef: ISanivaliDef = {
   validator: (param: ItemsParam, context) => {
     const sani = isSanivali(param)
       ? param
-      : new Sanivali(param as any, context.defs, context.path);
+      : new Sanivali(param as any, context.defs);
 
     if (sani.async) {
       context.rule.async = true;
