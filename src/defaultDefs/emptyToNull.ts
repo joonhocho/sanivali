@@ -1,7 +1,7 @@
 import { ISanivaliDef } from '_src/types';
 import { isEmpty } from '_src/util';
 
-export type EmptyToNullParam = boolean | undefined;
+export type EmptyToNullParam = boolean | 'undefined' | undefined;
 
 export type EmptyToNullRuleItem =
   | 'emptyToNull'
@@ -10,7 +10,8 @@ export type EmptyToNullRuleItem =
 export const emptyToNullDef: ISanivaliDef = {
   sanitizer: (enable?: EmptyToNullParam) => {
     if (enable === false) return null;
-    return (v: unknown) => (isEmpty(v) ? null : v);
+    const nil = enable === 'undefined' ? undefined : null;
+    return (v: unknown) => (isEmpty(v) ? nil : v);
   },
   runOnNil: true,
 };

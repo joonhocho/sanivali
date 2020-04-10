@@ -139,6 +139,11 @@ import {
   RequiredRuleItem,
 } from './defaultDefs/required';
 import {
+  notEmptyDef,
+  NotEmptyParam,
+  NotEmptyRuleItem,
+} from './defaultDefs/notEmpty';
+import {
   safeIntegerDef,
   SafeIntegerParam,
   SafeIntegerRuleItem,
@@ -258,6 +263,7 @@ export const defaultDefs: ISanivaliDefMap = {
 
   // object validators
   required: requiredDef,
+  notEmpty: notEmptyDef,
   minProperties: minPropertiesDef,
   maxProperties: maxPropertiesDef,
   dependencies: dependenciesDef,
@@ -334,6 +340,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
 
   // object validators
   required?: RequiredParam;
+  notEmpty?: NotEmptyParam;
   minProperties?: MinPropertiesParam;
   maxProperties?: MaxPropertiesParam;
   dependencies?: DependenciesParam;
@@ -408,6 +415,7 @@ export type SanivaliDefaultRuleItem<T = any> =
 
   // object validators
   | RequiredRuleItem
+  | NotEmptyRuleItem
   | MinPropertiesRuleItem
   | MaxPropertiesRuleItem
   | DependenciesRuleItem

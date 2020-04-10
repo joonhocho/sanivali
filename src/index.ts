@@ -136,6 +136,11 @@ export {
   minPropertiesDef,
 } from './defaultDefs/minProperties';
 export {
+  NotEmptyParam,
+  NotEmptyRuleItem,
+  notEmptyDef,
+} from './defaultDefs/notEmpty';
+export {
   ParseFloatParam,
   ParseFloatRuleItem,
   parseFloatDef,

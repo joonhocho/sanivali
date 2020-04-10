@@ -20,7 +20,7 @@ test('items', async () => {
     async: true,
   });
 
-  sani.addRule([['items', [['minAsync', 3]]]]);
+  sani.addRule([['items', [['minAsync', 3] as any]]]);
 
   expect(await sani.run(['1', 2, '3.5'])).toStrictEqual({
     fatal: false,

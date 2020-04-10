@@ -16,7 +16,7 @@ test('Sanivali addDef / async / skipSanitize / skipValidate', async () => {
     },
   });
 
-  sani.addRule({ parseInt: true, saniMinAsync });
+  sani.addRule({ parseInt: true, minAsync: saniMinAsync } as any);
 
   expect(sani.run(2)).toBeInstanceOf(Promise);
 
@@ -37,7 +37,7 @@ test('Sanivali addDef / async / skipSanitize / skipValidate', async () => {
     value: 6,
   });
 
-  sani.addRule([['maxAsync', 5]]);
+  sani.addRule([['maxAsync', 5]] as any);
 
   expect(await sani.run('6')).toStrictEqual({
     fatal: false,
