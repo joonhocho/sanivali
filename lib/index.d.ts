@@ -1,7 +1,7 @@
 export { ISanivaliDefaultRuleMap, SanivaliDefaultRuleItem, SanivaliDefaultRuleSchema, defaultDefs, } from './defaultDefs';
 export { Sanivali } from './sanivali';
-export { AsyncSanitizer, AsyncValidator, GetSanitizer, GetValidator, ISanivaliBuildContext, ISanivaliCompiledDef, ISanivaliDef, ISanivaliDefMap, ISanivaliError, ISanivaliResult, ISanivaliRunOptions, PropPath, Sanitizer, SanivaliRule, SanivaliRuleInput, SanivaliRuleMap, SanivaliRuleParsedItem, ValidationResult, Validator, } from './types';
-export { isEmpty, isEmptyObject, isInteger, isSanivali } from './util';
+export { AsyncSanitizer, AsyncValidator, GetSanitizer, GetValidator, ISanivaliBuildContext, ISanivaliCompiledDef, ISanivaliDef, ISanivaliDefMap, ISanivaliError, ISanivaliResult, ISanivaliRunOptions, NilType, PropPath, Sanitizer, SanivaliRule, SanivaliRuleInput, SanivaliRuleMap, SanivaliRuleParsedItem, ValidationResult, Validator, } from './types';
+export { isEmpty, isEmptyObject, isInteger, isSanivali, nilTests, notNilTests, } from './util';
 export { AnyOfParam, AnyOfRuleItem, anyOfDef } from './defaultDefs/anyOf';
 export { DefaultParam, DefaultRuleItem, DefaultValue, DefaultValueThunk, compileDefaultParam, defaultDef, } from './defaultDefs/default';
 export { DefaultPropertiesParam, DefaultPropertiesRuleItem, defaultPropertiesDef, } from './defaultDefs/defaultProperties';

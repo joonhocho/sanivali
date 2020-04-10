@@ -17,6 +17,7 @@ export {
   ISanivaliError,
   ISanivaliResult,
   ISanivaliRunOptions,
+  NilType,
   PropPath,
   Sanitizer,
   SanivaliRule,
@@ -26,7 +27,14 @@ export {
   ValidationResult,
   Validator,
 } from './types';
-export { isEmpty, isEmptyObject, isInteger, isSanivali } from './util';
+export {
+  isEmpty,
+  isEmptyObject,
+  isInteger,
+  isSanivali,
+  nilTests,
+  notNilTests,
+} from './util';
 export { AnyOfParam, AnyOfRuleItem, anyOfDef } from './defaultDefs/anyOf';
 export {
   DefaultParam,

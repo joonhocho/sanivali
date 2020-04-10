@@ -1,5 +1,7 @@
 import type { Sanivali } from './sanivali';
 
+export type NilType = 'undefined' | 'null' | 'nil' | 'falsy' | 'empty';
+
 export type PropPath = Array<string | number>;
 
 export type Sanitizer<Val = any, Val2 = any> = (

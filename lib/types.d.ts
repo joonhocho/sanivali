@@ -1,4 +1,5 @@
 import type { Sanivali } from './sanivali';
+export declare type NilType = 'undefined' | 'null' | 'nil' | 'falsy' | 'empty';
 export declare type PropPath = Array<string | number>;
 export declare type Sanitizer<Val = any, Val2 = any> = (v: Val, context: ISanivaliRunOptions) => Val2;
 export declare type AsyncSanitizer<Val = any, Val2 = any> = (v: Val, context: ISanivaliRunOptions) => Val2 | Promise<Val2>;

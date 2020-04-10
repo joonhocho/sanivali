@@ -1,28 +1,21 @@
-import { ISanivaliDef } from '_src/types';
+import { ISanivaliDef, NilType } from '_src/types';
+import { notNilTests } from '_src/util';
 
-export type RemoveNilItemsParam =
-  | 'undefined'
-  | 'null'
-  | null
-  | 'nil'
-  | undefined;
+export type RemoveNilItemsParam = boolean | NilType | undefined;
 
 export type RemoveNilItemsRuleItem =
   | 'removeNilItems'
   | ['removeNilItems', RemoveNilItemsParam?];
 
 export const removeNilItemsDef: ISanivaliDef = {
-  sanitizer: (type?: RemoveNilItemsParam) => {
-    let fn: (x: unknown) => boolean;
-    if (type === 'undefined') {
-      fn = (x) => x !== undefined;
-    } else if (type === 'null' || type === null) {
-      fn = (x) => x !== null;
-    } else {
-      // nil
-      fn = (x) => x != null;
-    }
+  sanitizer: (type: RemoveNilItemsParam = 'nil') => {
+    if (type === false) return null;
 
-    return (v: any[]) => v.filter(fn);
+    // tslint:disable-next-line: no-parameter-reassignment
+    if (type === true) type = 'nil';
+
+    const test = notNilTests[type];
+
+    return (v: any[]) => v.filter(test);
   },
 };
