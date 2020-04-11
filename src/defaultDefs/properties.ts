@@ -1,5 +1,5 @@
 import { ISanivaliDef, ISanivaliResult } from '_src/types';
-import { isSanivali } from '_src/util';
+import { isSanivali, ANY_KEY } from '_src/util';
 
 import { Sanivali } from '../sanivali';
 import { SanivaliDefaultRuleSchema } from '../defaultDefs';
@@ -18,7 +18,7 @@ export const propertiesDef: ISanivaliDef = {
     const keys = Object.keys(props);
     const stringKeyMap: Record<string, 1> = {};
     const stringKeys = [] as Array<[string, Sanivali]>;
-    const patternKeys = [] as Array<[RegExp, Sanivali]>;
+    const patternKeys = [] as Array<[typeof ANY_KEY | RegExp, Sanivali]>;
     const regexKeyPattern = /^\/.*\/i?$/;
 
     let async = false;
@@ -32,7 +32,9 @@ export const propertiesDef: ISanivaliDef = {
 
       async = async || sani.async;
 
-      if (key.length > 2 && regexKeyPattern.test(key)) {
+      if (key === ANY_KEY) {
+        patternKeys.push([ANY_KEY, sani]);
+      } else if (key.length > 2 && regexKeyPattern.test(key)) {
         // pattern key
         if (key[key.length - 1] === 'i') {
           patternKeys.push([
@@ -74,7 +76,7 @@ export const propertiesDef: ISanivaliDef = {
           if (stringKeyMap[key] !== 1) {
             for (let j = 0, jl = patternKeys.length; j < jl; j += 1) {
               const [regex, sani] = patternKeys[j];
-              if (regex.test(key)) {
+              if (regex === ANY_KEY || regex.test(key)) {
                 matchedKeys.push(key);
                 promises.push(
                   sani.run(raw[key], { ...opts, path: [...path, key] })
@@ -152,7 +154,7 @@ export const propertiesDef: ISanivaliDef = {
         if (stringKeyMap[key] !== 1) {
           for (let j = 0, jl = patternKeys.length; j < jl; j += 1) {
             const [regex, sani] = patternKeys[j];
-            if (regex.test(key)) {
+            if (regex === ANY_KEY || regex.test(key)) {
               const res = sani.runSync(value[key], {
                 ...opts,
                 path: [...path, key],

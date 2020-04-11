@@ -1,5 +1,5 @@
 import { ISanivaliDef, NilType } from '_src/types';
-import { notNilTests } from '_src/util';
+import { notNilTests, ANY_KEY } from '_src/util';
 
 export type DeletePropertiesParam =
   | false
@@ -38,7 +38,9 @@ export const deletePropertiesDef: ISanivaliDef = {
     const pKeys = Object.keys(props);
     const shouldNotDeleteMap = {} as Record<string, (x: any) => boolean>;
     const keyMap = {} as Record<string, 1>;
-    let regexes: Array<[RegExp, (x: any) => boolean]> | null = [];
+    let regexes: Array<
+      [RegExp | typeof ANY_KEY, (x: any) => boolean]
+    > | null = [];
 
     for (let i = 0, l = pKeys.length; i < l; i += 1) {
       const key = pKeys[i];
@@ -53,7 +55,9 @@ export const deletePropertiesDef: ISanivaliDef = {
       shouldNotDeleteMap[key] = shouldNotDelete;
       keyMap[key] = 1;
 
-      if (regexKeyPattern.test(key)) {
+      if (key === ANY_KEY) {
+        regexes.push([ANY_KEY, shouldNotDelete]);
+      } else if (regexKeyPattern.test(key)) {
         // pattern key
         if (key[key.length - 1] === 'i') {
           regexes.push([
@@ -87,7 +91,7 @@ export const deletePropertiesDef: ISanivaliDef = {
         } else if (regexes) {
           for (let j = 0, jl = regexes.length; j < jl; j += 1) {
             const [regex, shouldNotDelete] = regexes[j];
-            if (regex.test(key)) {
+            if (regex === ANY_KEY || regex.test(key)) {
               matched = true;
               if (shouldNotDelete(p)) {
                 newV[key] = p;

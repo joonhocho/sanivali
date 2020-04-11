@@ -39,3 +39,5 @@ export const notNilTests: Record<NilType, (x: any) => boolean> = {
   falsy: (x) => !!x,
   empty: (x) => !isEmpty(x),
 };
+
+export const ANY_KEY = '/.*/';
