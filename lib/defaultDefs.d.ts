@@ -4,6 +4,7 @@ import { DefaultPropertiesParam, DefaultPropertiesRuleItem } from './defaultDefs
 import { DeletePropertiesParam, DeletePropertiesRuleItem } from './defaultDefs/deleteProperties';
 import { DependenciesParam, DependenciesRuleItem } from './defaultDefs/dependencies';
 import { EmptyToNullParam, EmptyToNullRuleItem } from './defaultDefs/emptyToNull';
+import { ToConstParam, ToConstRuleItem } from './defaultDefs/toConst';
 import { ConstParam, ConstRuleItem } from './defaultDefs/const';
 import { EnumParam, EnumRuleItem } from './defaultDefs/enum';
 import { ExclusiveMaximumParam, ExclusiveMaximumRuleItem } from './defaultDefs/exclusiveMaximum';
@@ -51,6 +52,7 @@ import type { Sanivali } from './sanivali';
 export declare const defaultDefs: ISanivaliDefMap;
 export interface ISanivaliDefaultRuleMap<T = any> {
     default?: DefaultParam;
+    toConst?: ToConstParam;
     emptyToNull?: EmptyToNullParam;
     valid?: ValidParam;
     invalid?: InvalidParam;
@@ -99,6 +101,6 @@ export interface ISanivaliDefaultRuleMap<T = any> {
     anyOf?: AnyOfParam<T>;
     ifElse?: IfElseParam<T>;
 }
-export declare type SanivaliDefaultRuleItem<T = any> = DefaultRuleItem | EmptyToNullRuleItem | ValidRuleItem | InvalidRuleItem | TypeRuleItem | InstanceRuleItem | ConstRuleItem | EnumRuleItem | ParseIntRuleItem | ParseFloatRuleItem | FiniteRuleItem | IntegerRuleItem | SafeIntegerRuleItem | MinimumRuleItem | ExclusiveMinimumRuleItem | MaximumRuleItem | ExclusiveMaximumRuleItem | TrimRuleItem | TrimLeftRuleItem | TrimRightRuleItem | TrimToNullRuleItem | ToLocaleLowerCaseRuleItem | ToLocaleUpperCaseRuleItem | ToLowerCaseRuleItem | ToUpperCaseRuleItem | MinLengthRuleItem | MaxLengthRuleItem | PatternRuleItem | ToDateRuleItem | ToTimestampRuleItem | FilterItemsRuleItem | RemoveDuplicateItemsRuleItem | RemoveItemsRuleItem | MinItemsRuleItem | MaxItemsRuleItem | UniqueItemsRuleItem | ItemsRuleItem<T> | DefaultPropertiesRuleItem | FilterPropertiesRuleItem | DeletePropertiesRuleItem | RequiredRuleItem | NotEmptyRuleItem | MinPropertiesRuleItem | MaxPropertiesRuleItem | DependenciesRuleItem | PropertiesRuleItem<T> | AnyOfRuleItem<T> | IfElseRuleItem<T>;
+export declare type SanivaliDefaultRuleItem<T = any> = DefaultRuleItem | ToConstRuleItem | EmptyToNullRuleItem | ValidRuleItem | InvalidRuleItem | TypeRuleItem | InstanceRuleItem | ConstRuleItem | EnumRuleItem | ParseIntRuleItem | ParseFloatRuleItem | FiniteRuleItem | IntegerRuleItem | SafeIntegerRuleItem | MinimumRuleItem | ExclusiveMinimumRuleItem | MaximumRuleItem | ExclusiveMaximumRuleItem | TrimRuleItem | TrimLeftRuleItem | TrimRightRuleItem | TrimToNullRuleItem | ToLocaleLowerCaseRuleItem | ToLocaleUpperCaseRuleItem | ToLowerCaseRuleItem | ToUpperCaseRuleItem | MinLengthRuleItem | MaxLengthRuleItem | PatternRuleItem | ToDateRuleItem | ToTimestampRuleItem | FilterItemsRuleItem | RemoveDuplicateItemsRuleItem | RemoveItemsRuleItem | MinItemsRuleItem | MaxItemsRuleItem | UniqueItemsRuleItem | ItemsRuleItem<T> | DefaultPropertiesRuleItem | FilterPropertiesRuleItem | DeletePropertiesRuleItem | RequiredRuleItem | NotEmptyRuleItem | MinPropertiesRuleItem | MaxPropertiesRuleItem | DependenciesRuleItem | PropertiesRuleItem<T> | AnyOfRuleItem<T> | IfElseRuleItem<T>;
 export declare type SanivaliDefaultRuleSchema<T = any> = ISanivaliDefaultRuleMap<T> | Array<SanivaliDefaultRuleItem<T> | Sanivali<any, any>>;
 //# sourceMappingURL=defaultDefs.d.ts.map

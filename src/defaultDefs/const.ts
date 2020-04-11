@@ -1,6 +1,6 @@
 import { ISanivaliDef } from '_src/types';
 
-export type ConstParam = null | boolean | number | string;
+export type ConstParam = undefined | null | boolean | number | string;
 
 export type ConstRuleItem = ['const', ConstParam];
 

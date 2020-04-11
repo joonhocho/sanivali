@@ -37,6 +37,7 @@ export { RemoveDuplicateItemsParam, RemoveDuplicateItemsRuleItem, removeDuplicat
 export { RemoveItemsParam, RemoveItemsRuleItem, removeItemsDef, } from './defaultDefs/removeItems';
 export { RequiredParam, RequiredRuleItem, requiredDef, } from './defaultDefs/required';
 export { SafeIntegerParam, SafeIntegerRuleItem, safeIntegerDef, } from './defaultDefs/safeInteger';
+export { ToConstParam, ToConstRuleItem, toConstDef, } from './defaultDefs/toConst';
 export { ToDateParam, ToDateRuleItem, toDateDef } from './defaultDefs/toDate';
 export { ToLocaleLowerCaseParam, ToLocaleLowerCaseRuleItem, toLocaleLowerCaseDef, } from './defaultDefs/toLocaleLowerCase';
 export { ToLocaleUpperCaseParam, ToLocaleUpperCaseRuleItem, toLocaleUpperCaseDef, } from './defaultDefs/toLocaleUpperCase';

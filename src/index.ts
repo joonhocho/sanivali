@@ -190,6 +190,11 @@ export {
   SafeIntegerRuleItem,
   safeIntegerDef,
 } from './defaultDefs/safeInteger';
+export {
+  ToConstParam,
+  ToConstRuleItem,
+  toConstDef,
+} from './defaultDefs/toConst';
 export { ToDateParam, ToDateRuleItem, toDateDef } from './defaultDefs/toDate';
 export {
   ToLocaleLowerCaseParam,

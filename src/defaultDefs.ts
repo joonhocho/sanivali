@@ -24,6 +24,11 @@ import {
   EmptyToNullParam,
   EmptyToNullRuleItem,
 } from './defaultDefs/emptyToNull';
+import {
+  toConstDef,
+  ToConstParam,
+  ToConstRuleItem,
+} from './defaultDefs/toConst';
 import { constDef, ConstParam, ConstRuleItem } from './defaultDefs/const';
 import { enumDef, EnumParam, EnumRuleItem } from './defaultDefs/enum';
 import {
@@ -205,6 +210,7 @@ import type { Sanivali } from './sanivali';
 export const defaultDefs: ISanivaliDefMap = {
   // general sanitizers
   default: defaultDef,
+  toConst: toConstDef,
   emptyToNull: emptyToNullDef,
 
   // general validators
@@ -283,6 +289,7 @@ export const defaultDefs: ISanivaliDefMap = {
 export interface ISanivaliDefaultRuleMap<T = any> {
   // general sanitizers
   default?: DefaultParam;
+  toConst?: ToConstParam;
   emptyToNull?: EmptyToNullParam;
 
   // general validators
@@ -361,6 +368,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
 export type SanivaliDefaultRuleItem<T = any> =
   // general sanitizers
   | DefaultRuleItem
+  | ToConstRuleItem
   | EmptyToNullRuleItem
 
   // general validators
