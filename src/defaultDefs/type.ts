@@ -28,12 +28,19 @@ const typeTests: { [key in DataType]?: ((x: any) => boolean) | undefined } = {
   integer: (v) => typeof v === 'number' && isInteger(v),
 };
 
+const getTest = (p: DataType) =>
+  typeTests[p] || ((v: unknown) => typeof v === p);
+
 export const typeDef: ISanivaliDef = {
   validator: (param: TypeParam) => {
     if (Array.isArray(param)) {
-      const fns = param.map(
-        (p) => typeTests[p] || ((v: unknown) => typeof v === p)
-      );
+      if (param.length === 0) {
+        return null;
+      }
+      if (param.length === 1) {
+        return getTest(param[0]);
+      }
+      const fns = param.map(getTest);
       return (v: unknown) => {
         for (let i = 0, l = fns.length; i < l; i += 1) {
           if (fns[i](v)) return true;
@@ -41,7 +48,7 @@ export const typeDef: ISanivaliDef = {
         return false;
       };
     }
-    return typeTests[param] || ((v: unknown) => typeof v === param);
+    return getTest(param);
   },
   fatal: true,
   runOnNil: true,

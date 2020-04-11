@@ -44,6 +44,28 @@ test('type null', () => {
   });
 });
 
+test('type [null]', () => {
+  const sani = new Sanivali([['type', ['null']]]);
+
+  expect(sani.run(undefined)).toStrictEqual({
+    fatal: true,
+    errors: [
+      {
+        type: 'type',
+        param: ['null'],
+        value: undefined,
+      },
+    ],
+    value: undefined,
+  });
+
+  expect(sani.run(null)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: null,
+  });
+});
+
 test('type nil', () => {
   const sani = new Sanivali([['type', 'nil']]);
 
@@ -278,5 +300,21 @@ test('type multiple', () => {
     fatal: false,
     errors: null,
     value: [],
+  });
+});
+
+test('type []', () => {
+  const sani = new Sanivali([['type', []]]);
+
+  expect(sani.run(undefined)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: undefined,
+  });
+
+  expect(sani.run(null)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: null,
   });
 });
