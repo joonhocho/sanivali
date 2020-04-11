@@ -1,7 +1,7 @@
 import { Sanivali } from '../sanivali';
 
-test('removeNilItems default', async () => {
-  const sani = new Sanivali([['removeNilItems']]);
+test('removeItems default', async () => {
+  const sani = new Sanivali([['removeItems']]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,
@@ -10,18 +10,8 @@ test('removeNilItems default', async () => {
   });
 });
 
-test('removeNilItems true=nil', async () => {
-  const sani = new Sanivali([['removeNilItems', true]]);
-
-  expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
-    fatal: false,
-    errors: null,
-    value: [0, false, ''],
-  });
-});
-
-test('removeNilItems false=disable', async () => {
-  const sani = new Sanivali([['removeNilItems', false]]);
+test('removeItems false=disable', async () => {
+  const sani = new Sanivali([['removeItems', false]]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,
@@ -30,8 +20,8 @@ test('removeNilItems false=disable', async () => {
   });
 });
 
-test('removeNilItems nil', async () => {
-  const sani = new Sanivali([['removeNilItems', 'nil']]);
+test('removeItems nil', async () => {
+  const sani = new Sanivali([['removeItems', 'nil']]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,
@@ -40,8 +30,8 @@ test('removeNilItems nil', async () => {
   });
 });
 
-test('removeNilItems undefined', async () => {
-  const sani = new Sanivali([['removeNilItems', 'undefined']]);
+test('removeItems undefined', async () => {
+  const sani = new Sanivali([['removeItems', 'undefined']]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,
@@ -50,8 +40,8 @@ test('removeNilItems undefined', async () => {
   });
 });
 
-test('removeNilItems null', async () => {
-  const sani = new Sanivali([['removeNilItems', 'null']]);
+test('removeItems null', async () => {
+  const sani = new Sanivali([['removeItems', 'null']]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,
@@ -60,8 +50,8 @@ test('removeNilItems null', async () => {
   });
 });
 
-test('removeNilItems falsy', async () => {
-  const sani = new Sanivali([['removeNilItems', 'falsy']]);
+test('removeItems falsy', async () => {
+  const sani = new Sanivali([['removeItems', 'falsy']]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,
@@ -70,8 +60,8 @@ test('removeNilItems falsy', async () => {
   });
 });
 
-test('removeNilItems empty', async () => {
-  const sani = new Sanivali([['removeNilItems', 'empty']]);
+test('removeItems empty', async () => {
+  const sani = new Sanivali([['removeItems', 'empty']]);
 
   expect(sani.run([0, null, false, undefined, ''])).toStrictEqual({
     fatal: false,

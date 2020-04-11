@@ -1,7 +1,7 @@
 import { AnyOfParam, AnyOfRuleItem } from './defaultDefs/anyOf';
 import { DefaultParam, DefaultRuleItem } from './defaultDefs/default';
 import { DefaultPropertiesParam, DefaultPropertiesRuleItem } from './defaultDefs/defaultProperties';
-import { DeleteNilPropertiesParam, DeleteNilPropertiesRuleItem } from './defaultDefs/deleteNilProperties';
+import { DeletePropertiesParam, DeletePropertiesRuleItem } from './defaultDefs/deleteProperties';
 import { DependenciesParam, DependenciesRuleItem } from './defaultDefs/dependencies';
 import { EmptyToNullParam, EmptyToNullRuleItem } from './defaultDefs/emptyToNull';
 import { EnumParam, EnumRuleItem } from './defaultDefs/enum';
@@ -9,7 +9,6 @@ import { ExclusiveMaximumParam, ExclusiveMaximumRuleItem } from './defaultDefs/e
 import { ExclusiveMinimumParam, ExclusiveMinimumRuleItem } from './defaultDefs/exclusiveMinimum';
 import { FilterItemsParam, FilterItemsRuleItem } from './defaultDefs/filterItems';
 import { FilterPropertiesParam, FilterPropertiesRuleItem } from './defaultDefs/filterProperties';
-import { FilterUniqueItemsParam, FilterUniqueItemsRuleItem } from './defaultDefs/filterUniqueItems';
 import { FiniteParam, FiniteRuleItem } from './defaultDefs/finite';
 import { IfElseParam, IfElseRuleItem } from './defaultDefs/ifElse';
 import { InstanceParam, InstanceRuleItem } from './defaultDefs/instance';
@@ -30,7 +29,7 @@ import { ParseIntParam, ParseIntRuleItem } from './defaultDefs/parseInt';
 import { PatternParam, PatternRuleItem } from './defaultDefs/pattern';
 import { PropertiesParam, PropertiesRuleItem } from './defaultDefs/properties';
 import { RemoveDuplicateItemsParam, RemoveDuplicateItemsRuleItem } from './defaultDefs/removeDuplicateItems';
-import { RemoveNilItemsParam, RemoveNilItemsRuleItem } from './defaultDefs/removeNilItems';
+import { RemoveItemsParam, RemoveItemsRuleItem } from './defaultDefs/removeItems';
 import { RequiredParam, RequiredRuleItem } from './defaultDefs/required';
 import { SafeIntegerParam, SafeIntegerRuleItem } from './defaultDefs/safeInteger';
 import { ToDateParam, ToDateRuleItem } from './defaultDefs/toDate';
@@ -80,16 +79,15 @@ export interface ISanivaliDefaultRuleMap<T = any> {
     toDate?: ToDateParam;
     toTimestamp?: ToTimestampParam;
     filterItems?: FilterItemsParam;
-    filterUniqueItems?: FilterUniqueItemsParam;
     removeDuplicateItems?: RemoveDuplicateItemsParam;
-    removeNilItems?: RemoveNilItemsParam;
+    removeItems?: RemoveItemsParam;
     minItems?: MinItemsParam;
     maxItems?: MaxItemsParam;
     uniqueItems?: UniqueItemsParam;
     items?: ItemsParam<T>;
     defaultProperties?: DefaultPropertiesParam;
     filterProperties?: FilterPropertiesParam;
-    deleteNilProperties?: DeleteNilPropertiesParam;
+    deleteProperties?: DeletePropertiesParam;
     required?: RequiredParam;
     notEmpty?: NotEmptyParam;
     minProperties?: MinPropertiesParam;
@@ -99,6 +97,6 @@ export interface ISanivaliDefaultRuleMap<T = any> {
     anyOf?: AnyOfParam<T>;
     ifElse?: IfElseParam<T>;
 }
-export declare type SanivaliDefaultRuleItem<T = any> = DefaultRuleItem | EmptyToNullRuleItem | ValidRuleItem | InvalidRuleItem | TypeRuleItem | InstanceRuleItem | EnumRuleItem | ParseIntRuleItem | ParseFloatRuleItem | FiniteRuleItem | IntegerRuleItem | SafeIntegerRuleItem | MinimumRuleItem | ExclusiveMinimumRuleItem | MaximumRuleItem | ExclusiveMaximumRuleItem | TrimRuleItem | TrimLeftRuleItem | TrimRightRuleItem | TrimToNullRuleItem | ToLocaleLowerCaseRuleItem | ToLocaleUpperCaseRuleItem | ToLowerCaseRuleItem | ToUpperCaseRuleItem | MinLengthRuleItem | MaxLengthRuleItem | PatternRuleItem | ToDateRuleItem | ToTimestampRuleItem | FilterItemsRuleItem | FilterUniqueItemsRuleItem | RemoveDuplicateItemsRuleItem | RemoveNilItemsRuleItem | MinItemsRuleItem | MaxItemsRuleItem | UniqueItemsRuleItem | ItemsRuleItem<T> | DefaultPropertiesRuleItem | FilterPropertiesRuleItem | DeleteNilPropertiesRuleItem | RequiredRuleItem | NotEmptyRuleItem | MinPropertiesRuleItem | MaxPropertiesRuleItem | DependenciesRuleItem | PropertiesRuleItem<T> | AnyOfRuleItem<T> | IfElseRuleItem<T>;
+export declare type SanivaliDefaultRuleItem<T = any> = DefaultRuleItem | EmptyToNullRuleItem | ValidRuleItem | InvalidRuleItem | TypeRuleItem | InstanceRuleItem | EnumRuleItem | ParseIntRuleItem | ParseFloatRuleItem | FiniteRuleItem | IntegerRuleItem | SafeIntegerRuleItem | MinimumRuleItem | ExclusiveMinimumRuleItem | MaximumRuleItem | ExclusiveMaximumRuleItem | TrimRuleItem | TrimLeftRuleItem | TrimRightRuleItem | TrimToNullRuleItem | ToLocaleLowerCaseRuleItem | ToLocaleUpperCaseRuleItem | ToLowerCaseRuleItem | ToUpperCaseRuleItem | MinLengthRuleItem | MaxLengthRuleItem | PatternRuleItem | ToDateRuleItem | ToTimestampRuleItem | FilterItemsRuleItem | RemoveDuplicateItemsRuleItem | RemoveItemsRuleItem | MinItemsRuleItem | MaxItemsRuleItem | UniqueItemsRuleItem | ItemsRuleItem<T> | DefaultPropertiesRuleItem | FilterPropertiesRuleItem | DeletePropertiesRuleItem | RequiredRuleItem | NotEmptyRuleItem | MinPropertiesRuleItem | MaxPropertiesRuleItem | DependenciesRuleItem | PropertiesRuleItem<T> | AnyOfRuleItem<T> | IfElseRuleItem<T>;
 export declare type SanivaliDefaultRuleSchema<T = any> = ISanivaliDefaultRuleMap<T> | Array<SanivaliDefaultRuleItem<T> | Sanivali<any, any>>;
 //# sourceMappingURL=defaultDefs.d.ts.map

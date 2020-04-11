@@ -10,10 +10,10 @@ import {
   DefaultPropertiesRuleItem,
 } from './defaultDefs/defaultProperties';
 import {
-  deleteNilPropertiesDef,
-  DeleteNilPropertiesParam,
-  DeleteNilPropertiesRuleItem,
-} from './defaultDefs/deleteNilProperties';
+  deletePropertiesDef,
+  DeletePropertiesParam,
+  DeletePropertiesRuleItem,
+} from './defaultDefs/deleteProperties';
 import {
   dependenciesDef,
   DependenciesParam,
@@ -45,11 +45,6 @@ import {
   FilterPropertiesParam,
   FilterPropertiesRuleItem,
 } from './defaultDefs/filterProperties';
-import {
-  filterUniqueItemsDef,
-  FilterUniqueItemsParam,
-  FilterUniqueItemsRuleItem,
-} from './defaultDefs/filterUniqueItems';
 import { finiteDef, FiniteParam, FiniteRuleItem } from './defaultDefs/finite';
 import { ifElseDef, IfElseParam, IfElseRuleItem } from './defaultDefs/ifElse';
 import {
@@ -139,10 +134,10 @@ import {
   RemoveDuplicateItemsRuleItem,
 } from './defaultDefs/removeDuplicateItems';
 import {
-  removeNilItemsDef,
-  RemoveNilItemsParam,
-  RemoveNilItemsRuleItem,
-} from './defaultDefs/removeNilItems';
+  removeItemsDef,
+  RemoveItemsParam,
+  RemoveItemsRuleItem,
+} from './defaultDefs/removeItems';
 import {
   requiredDef,
   RequiredParam,
@@ -254,9 +249,8 @@ export const defaultDefs: ISanivaliDefMap = {
 
   // array sanitizers
   filterItems: filterItemsDef,
-  filterUniqueItems: filterUniqueItemsDef,
   removeDuplicateItems: removeDuplicateItemsDef,
-  removeNilItems: removeNilItemsDef,
+  removeItems: removeItemsDef,
 
   // array validators
   minItems: minItemsDef,
@@ -267,7 +261,7 @@ export const defaultDefs: ISanivaliDefMap = {
   // object sanitizer
   defaultProperties: defaultPropertiesDef,
   filterProperties: filterPropertiesDef,
-  deleteNilProperties: deleteNilPropertiesDef,
+  deleteProperties: deletePropertiesDef,
 
   // object validators
   required: requiredDef,
@@ -332,9 +326,8 @@ export interface ISanivaliDefaultRuleMap<T = any> {
 
   // array sanitizers
   filterItems?: FilterItemsParam;
-  filterUniqueItems?: FilterUniqueItemsParam;
   removeDuplicateItems?: RemoveDuplicateItemsParam;
-  removeNilItems?: RemoveNilItemsParam;
+  removeItems?: RemoveItemsParam;
 
   // array validators
   minItems?: MinItemsParam;
@@ -345,7 +338,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
   // object sanitizer
   defaultProperties?: DefaultPropertiesParam;
   filterProperties?: FilterPropertiesParam;
-  deleteNilProperties?: DeleteNilPropertiesParam;
+  deleteProperties?: DeletePropertiesParam;
 
   // object validators
   required?: RequiredParam;
@@ -408,9 +401,8 @@ export type SanivaliDefaultRuleItem<T = any> =
 
   // array sanitizers
   | FilterItemsRuleItem
-  | FilterUniqueItemsRuleItem
   | RemoveDuplicateItemsRuleItem
-  | RemoveNilItemsRuleItem
+  | RemoveItemsRuleItem
 
   // array validators
   | MinItemsRuleItem
@@ -421,7 +413,7 @@ export type SanivaliDefaultRuleItem<T = any> =
   // object sanitizer
   | DefaultPropertiesRuleItem
   | FilterPropertiesRuleItem
-  | DeleteNilPropertiesRuleItem
+  | DeletePropertiesRuleItem
 
   // object validators
   | RequiredRuleItem

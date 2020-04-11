@@ -5,7 +5,7 @@ export { isEmpty, isEmptyObject, isInteger, isSanivali, nilTests, notNilTests, }
 export { AnyOfParam, AnyOfRuleItem, anyOfDef } from './defaultDefs/anyOf';
 export { DefaultParam, DefaultRuleItem, DefaultValue, DefaultValueThunk, compileDefaultParam, defaultDef, } from './defaultDefs/default';
 export { DefaultPropertiesParam, DefaultPropertiesRuleItem, defaultPropertiesDef, } from './defaultDefs/defaultProperties';
-export { DeleteNilPropertiesParam, DeleteNilPropertiesRuleItem, deleteNilPropertiesDef, } from './defaultDefs/deleteNilProperties';
+export { DeletePropertiesParam, DeletePropertiesRuleItem, deletePropertiesDef, } from './defaultDefs/deleteProperties';
 export { DependenciesParam, DependenciesRuleItem, dependenciesDef, } from './defaultDefs/dependencies';
 export { EmptyToNullParam, EmptyToNullRuleItem, emptyToNullDef, } from './defaultDefs/emptyToNull';
 export { EnumParam, EnumRuleItem, enumDef } from './defaultDefs/enum';
@@ -13,7 +13,6 @@ export { ExclusiveMaximumParam, ExclusiveMaximumRuleItem, exclusiveMaximumDef, }
 export { ExclusiveMinimumParam, ExclusiveMinimumRuleItem, exclusiveMinimumDef, } from './defaultDefs/exclusiveMinimum';
 export { FilterItemsParam, FilterItemsRuleItem, filterItemsDef, } from './defaultDefs/filterItems';
 export { FilterPropertiesParam, FilterPropertiesRuleItem, filterPropertiesDef, } from './defaultDefs/filterProperties';
-export { FilterUniqueItemsParam, FilterUniqueItemsRuleItem, filterUniqueItemsDef, } from './defaultDefs/filterUniqueItems';
 export { FiniteParam, FiniteRuleItem, finiteDef } from './defaultDefs/finite';
 export { IfElseParam, IfElseRuleItem, ifElseDef } from './defaultDefs/ifElse';
 export { InstanceParam, InstanceRuleItem, instanceDef, } from './defaultDefs/instance';
@@ -34,7 +33,7 @@ export { ParseIntParam, ParseIntRuleItem, parseIntDef, } from './defaultDefs/par
 export { PatternParam, PatternRuleItem, patternDef, } from './defaultDefs/pattern';
 export { PropertiesParam, PropertiesRuleItem, propertiesDef, } from './defaultDefs/properties';
 export { RemoveDuplicateItemsParam, RemoveDuplicateItemsRuleItem, removeDuplicateItemsDef, } from './defaultDefs/removeDuplicateItems';
-export { RemoveNilItemsParam, RemoveNilItemsRuleItem, removeNilItemsDef, } from './defaultDefs/removeNilItems';
+export { RemoveItemsParam, RemoveItemsRuleItem, removeItemsDef, } from './defaultDefs/removeItems';
 export { RequiredParam, RequiredRuleItem, requiredDef, } from './defaultDefs/required';
 export { SafeIntegerParam, SafeIntegerRuleItem, safeIntegerDef, } from './defaultDefs/safeInteger';
 export { ToDateParam, ToDateRuleItem, toDateDef } from './defaultDefs/toDate';

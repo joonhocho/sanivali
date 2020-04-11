@@ -50,10 +50,10 @@ export {
   defaultPropertiesDef,
 } from './defaultDefs/defaultProperties';
 export {
-  DeleteNilPropertiesParam,
-  DeleteNilPropertiesRuleItem,
-  deleteNilPropertiesDef,
-} from './defaultDefs/deleteNilProperties';
+  DeletePropertiesParam,
+  DeletePropertiesRuleItem,
+  deletePropertiesDef,
+} from './defaultDefs/deleteProperties';
 export {
   DependenciesParam,
   DependenciesRuleItem,
@@ -85,11 +85,6 @@ export {
   FilterPropertiesRuleItem,
   filterPropertiesDef,
 } from './defaultDefs/filterProperties';
-export {
-  FilterUniqueItemsParam,
-  FilterUniqueItemsRuleItem,
-  filterUniqueItemsDef,
-} from './defaultDefs/filterUniqueItems';
 export { FiniteParam, FiniteRuleItem, finiteDef } from './defaultDefs/finite';
 export { IfElseParam, IfElseRuleItem, ifElseDef } from './defaultDefs/ifElse';
 export {
@@ -179,10 +174,10 @@ export {
   removeDuplicateItemsDef,
 } from './defaultDefs/removeDuplicateItems';
 export {
-  RemoveNilItemsParam,
-  RemoveNilItemsRuleItem,
-  removeNilItemsDef,
-} from './defaultDefs/removeNilItems';
+  RemoveItemsParam,
+  RemoveItemsRuleItem,
+  removeItemsDef,
+} from './defaultDefs/removeItems';
 export {
   RequiredParam,
   RequiredRuleItem,

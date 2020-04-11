@@ -1,6 +1,7 @@
 import { ISanivaliDef } from '_src/types';
 
 export type RemoveDuplicateItemsParam =
+  | boolean
   | string
   | ((x: any) => string)
   | undefined;
@@ -11,49 +12,40 @@ export type RemoveDuplicateItemsRuleItem =
 
 export const removeDuplicateItemsDef: ISanivaliDef = {
   sanitizer: (getKey?: RemoveDuplicateItemsParam) => {
+    if (getKey === false) return null;
+
     if (typeof getKey === 'string') {
-      return (v: any[]) => {
-        const keyMap = {} as Record<string, 1>;
-        const filtered = [] as any[];
-        for (let i = 0, l = v.length; i < l; i += 1) {
-          const x = v[i];
+      return (v: any[]) =>
+        v.filter(function (this: Record<string, 1>, x): boolean {
           const key = x[getKey];
-          if (keyMap[key] !== 1) {
-            keyMap[key] = 1;
-            filtered.push(x);
+          if (this[key] === 1) {
+            return false;
           }
-        }
-        return filtered;
-      };
+          this[key] = 1;
+          return true;
+        }, {});
     }
 
-    if (getKey) {
-      return (v: any[]) => {
-        const keyMap = {} as Record<string, 1>;
-        const filtered = [] as any[];
-        for (let i = 0, l = v.length; i < l; i += 1) {
-          const x = v[i];
+    if (typeof getKey === 'function') {
+      return (v: any[]) =>
+        v.filter(function (this: Record<string, 1>, x): boolean {
           const key = getKey(x);
-          if (keyMap[key] !== 1) {
-            keyMap[key] = 1;
-            filtered.push(x);
+          if (this[key] === 1) {
+            return false;
           }
-        }
-        return filtered;
-      };
+          this[key] = 1;
+          return true;
+        }, {});
     }
 
-    return (v: any[]) => {
-      const keyMap = {} as Record<string, 1>;
-      const filtered = [] as any[];
-      for (let i = 0, l = v.length; i < l; i += 1) {
-        const x = v[i];
-        if (keyMap[x] !== 1) {
-          keyMap[x] = 1;
-          filtered.push(x);
+    return (v: any[]) =>
+      v.filter(function (this: Record<string, 1>, x): boolean {
+        const key = x;
+        if (this[key] === 1) {
+          return false;
         }
-      }
-      return filtered;
-    };
+        this[key] = 1;
+        return true;
+      }, {});
   },
 };

@@ -1,7 +1,7 @@
 import { Sanivali } from '../sanivali';
 
-test('deleteNilProperties default', async () => {
-  const sani = new Sanivali([['deleteNilProperties']]);
+test('deleteProperties nil', async () => {
+  const sani = new Sanivali([['deleteProperties', 'nil']]);
 
   expect(
     sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
@@ -12,32 +12,8 @@ test('deleteNilProperties default', async () => {
   });
 });
 
-test('deleteNilProperties nil', async () => {
-  const sani = new Sanivali([['deleteNilProperties', 'nil']]);
-
-  expect(
-    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
-  ).toStrictEqual({
-    fatal: false,
-    errors: null,
-    value: { a: 0, c: false, e: '' },
-  });
-});
-
-test('deleteNilProperties true=nil', async () => {
-  const sani = new Sanivali([['deleteNilProperties', true]]);
-
-  expect(
-    sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
-  ).toStrictEqual({
-    fatal: false,
-    errors: null,
-    value: { a: 0, c: false, e: '' },
-  });
-});
-
-test('deleteNilProperties false=disabled', async () => {
-  const sani = new Sanivali([['deleteNilProperties', false]]);
+test('deleteProperties false=disabled', async () => {
+  const sani = new Sanivali([['deleteProperties', false]]);
 
   expect(
     sani.run({ a: 0, b: null, c: false, d: undefined, e: '' })
@@ -48,9 +24,9 @@ test('deleteNilProperties false=disabled', async () => {
   });
 });
 
-test('deleteNilProperties undefined', async () => {
+test('deleteProperties undefined', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: 'undefined',
+    deleteProperties: 'undefined',
   });
 
   expect(
@@ -62,9 +38,9 @@ test('deleteNilProperties undefined', async () => {
   });
 });
 
-test('deleteNilProperties null', async () => {
+test('deleteProperties null', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: 'null',
+    deleteProperties: 'null',
   });
 
   expect(
@@ -76,9 +52,9 @@ test('deleteNilProperties null', async () => {
   });
 });
 
-test('deleteNilProperties empty', async () => {
+test('deleteProperties empty', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: 'empty',
+    deleteProperties: 'empty',
   });
 
   expect(
@@ -90,9 +66,9 @@ test('deleteNilProperties empty', async () => {
   });
 });
 
-test('deleteNilProperties falsy', async () => {
+test('deleteProperties falsy', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: 'falsy',
+    deleteProperties: 'falsy',
   });
 
   expect(
@@ -104,9 +80,9 @@ test('deleteNilProperties falsy', async () => {
   });
 });
 
-test('deleteNilProperties keys', async () => {
+test('deleteProperties keys', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: {
+    deleteProperties: {
       a: 'nil',
       b: 'nil',
     },
@@ -121,9 +97,9 @@ test('deleteNilProperties keys', async () => {
   });
 });
 
-test('deleteNilProperties keys', async () => {
+test('deleteProperties keys', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: {
+    deleteProperties: {
       undefined: 'undefined',
       null: 'null',
       nil: 'nil',
@@ -167,9 +143,9 @@ test('deleteNilProperties keys', async () => {
   });
 });
 
-test('deleteNilProperties pattern keys', async () => {
+test('deleteProperties pattern keys', async () => {
   const sani = new Sanivali({
-    deleteNilProperties: {
+    deleteProperties: {
       undefined: 'undefined',
       null: 'null',
       nil: 'nil',
