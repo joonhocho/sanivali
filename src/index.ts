@@ -37,6 +37,7 @@ export {
   notNilTests,
 } from './util';
 export { AnyOfParam, AnyOfRuleItem, anyOfDef } from './defaultDefs/anyOf';
+export { ConstParam, ConstRuleItem, constDef } from './defaultDefs/const';
 export {
   DefaultParam,
   DefaultRuleItem,

@@ -24,6 +24,7 @@ import {
   EmptyToNullParam,
   EmptyToNullRuleItem,
 } from './defaultDefs/emptyToNull';
+import { constDef, ConstParam, ConstRuleItem } from './defaultDefs/const';
 import { enumDef, EnumParam, EnumRuleItem } from './defaultDefs/enum';
 import {
   exclusiveMaximumDef,
@@ -211,6 +212,7 @@ export const defaultDefs: ISanivaliDefMap = {
   invalid: invalidDef,
   type: typeDef,
   instance: instanceDef,
+  const: constDef,
   enum: enumDef,
 
   // number sanitizers
@@ -288,6 +290,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
   invalid?: InvalidParam;
   type?: TypeParam;
   instance?: InstanceParam;
+  const?: ConstParam;
   enum?: EnumParam;
 
   // number sanitizers
@@ -365,6 +368,7 @@ export type SanivaliDefaultRuleItem<T = any> =
   | InvalidRuleItem
   | TypeRuleItem
   | InstanceRuleItem
+  | ConstRuleItem
   | EnumRuleItem
 
   // number sanitizers

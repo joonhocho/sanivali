@@ -3,6 +3,7 @@ export { Sanivali } from './sanivali';
 export { AsyncSanitizer, AsyncValidator, GetSanitizer, GetValidator, ISanivaliBuildContext, ISanivaliCompiledDef, ISanivaliDef, ISanivaliDefMap, ISanivaliError, ISanivaliResult, ISanivaliRunOptions, NilType, PropPath, Sanitizer, SanivaliRule, SanivaliRuleInput, SanivaliRuleMap, SanivaliRuleParsedItem, ValidationResult, Validator, } from './types';
 export { ANY_KEY, isEmpty, isEmptyObject, isInteger, isSanivali, nilTests, notNilTests, } from './util';
 export { AnyOfParam, AnyOfRuleItem, anyOfDef } from './defaultDefs/anyOf';
+export { ConstParam, ConstRuleItem, constDef } from './defaultDefs/const';
 export { DefaultParam, DefaultRuleItem, DefaultValue, DefaultValueThunk, compileDefaultParam, defaultDef, } from './defaultDefs/default';
 export { DefaultPropertiesParam, DefaultPropertiesRuleItem, defaultPropertiesDef, } from './defaultDefs/defaultProperties';
 export { DeletePropertiesParam, DeletePropertiesRuleItem, deletePropertiesDef, } from './defaultDefs/deleteProperties';
