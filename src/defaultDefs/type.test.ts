@@ -215,3 +215,68 @@ test('type array', () => {
     value: [],
   });
 });
+
+test('type multiple', () => {
+  const param = ['nil', 'number', 'array'];
+  const sani = new Sanivali([['type', param]]);
+
+  expect(sani.run(undefined)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: undefined,
+  });
+
+  expect(sani.run(null)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: null,
+  });
+
+  expect(sani.run(1)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: 1,
+  });
+
+  expect(sani.run(true)).toStrictEqual({
+    fatal: true,
+    errors: [
+      {
+        type: 'type',
+        param,
+        value: true,
+      },
+    ],
+    value: true,
+  });
+
+  expect(sani.run('')).toStrictEqual({
+    fatal: true,
+    errors: [
+      {
+        type: 'type',
+        param,
+        value: '',
+      },
+    ],
+    value: '',
+  });
+
+  expect(sani.run({})).toStrictEqual({
+    fatal: true,
+    errors: [
+      {
+        type: 'type',
+        param,
+        value: {},
+      },
+    ],
+    value: {},
+  });
+
+  expect(sani.run([])).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: [],
+  });
+});

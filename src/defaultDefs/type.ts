@@ -1,7 +1,7 @@
 import { ISanivaliDef } from '_src/types';
 import { isInteger } from '_src/util';
 
-export type TypeParam =
+export type DataType =
   | 'array'
   | 'bigint'
   | 'boolean'
@@ -15,29 +15,33 @@ export type TypeParam =
   | 'symbol'
   | 'undefined';
 
+export type TypeParam = DataType | DataType[];
+
 export type TypeRuleItem = ['type', TypeParam];
+
+const typeTests: { [key in DataType]?: ((x: any) => boolean) | undefined } = {
+  undefined: (v) => v === undefined,
+  null: (v) => v === null,
+  nil: (v) => v == null,
+  object: (v) => v != null && typeof v === 'object' && !Array.isArray(v),
+  array: Array.isArray,
+  integer: (v) => typeof v === 'number' && isInteger(v),
+};
 
 export const typeDef: ISanivaliDef = {
   validator: (param: TypeParam) => {
-    if (param === 'undefined') {
-      return (v) => v === undefined;
+    if (Array.isArray(param)) {
+      const fns = param.map(
+        (p) => typeTests[p] || ((v: unknown) => typeof v === p)
+      );
+      return (v: unknown) => {
+        for (let i = 0, l = fns.length; i < l; i += 1) {
+          if (fns[i](v)) return true;
+        }
+        return false;
+      };
     }
-    if (param === 'null') {
-      return (v) => v === null;
-    }
-    if (param === 'nil') {
-      return (v) => v == null;
-    }
-    if (param === 'object') {
-      return (v) => v != null && typeof v === 'object' && !Array.isArray(v);
-    }
-    if (param === 'array') {
-      return Array.isArray;
-    }
-    if (param === 'integer') {
-      return (v) => typeof v === 'number' && isInteger(v);
-    }
-    return (v) => typeof v === param;
+    return typeTests[param] || ((v: unknown) => typeof v === param);
   },
   fatal: true,
   runOnNil: true,

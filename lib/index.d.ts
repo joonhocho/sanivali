@@ -48,7 +48,7 @@ export { TrimParam, TrimRuleItem, trimDef } from './defaultDefs/trim';
 export { TrimLeftParam, TrimLeftRuleItem, trimLeftDef, } from './defaultDefs/trimLeft';
 export { TrimRightParam, TrimRightRuleItem, trimRightDef, } from './defaultDefs/trimRight';
 export { TrimToNullParam, TrimToNullRuleItem, trimToNullDef, } from './defaultDefs/trimToNull';
-export { TypeParam, TypeRuleItem, typeDef } from './defaultDefs/type';
+export { DataType, TypeParam, TypeRuleItem, typeDef } from './defaultDefs/type';
 export { UniqueItemsParam, UniqueItemsRuleItem, uniqueItemsDef, } from './defaultDefs/uniqueItems';
 export { ValidParam, ValidRuleItem, validDef } from './defaultDefs/valid';
 //# sourceMappingURL=index.d.ts.map

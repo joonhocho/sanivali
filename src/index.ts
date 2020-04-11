@@ -237,7 +237,7 @@ export {
   TrimToNullRuleItem,
   trimToNullDef,
 } from './defaultDefs/trimToNull';
-export { TypeParam, TypeRuleItem, typeDef } from './defaultDefs/type';
+export { DataType, TypeParam, TypeRuleItem, typeDef } from './defaultDefs/type';
 export {
   UniqueItemsParam,
   UniqueItemsRuleItem,
