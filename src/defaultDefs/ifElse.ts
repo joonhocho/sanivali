@@ -4,11 +4,13 @@ import { isSanivali } from '_src/util';
 import { Sanivali } from '../sanivali';
 import { SanivaliDefaultRuleSchema } from '../defaultDefs';
 
-export type IfElseParam<T = SanivaliDefaultRuleSchema> = {
-  if: T | Sanivali;
-  then?: T | Sanivali;
-  else?: T | Sanivali;
-};
+export type IfElseParam<T = SanivaliDefaultRuleSchema> =
+  | {
+      if: T | Sanivali;
+      then?: T | Sanivali;
+      else?: T | Sanivali;
+    }
+  | [T | Sanivali, T | Sanivali | null, (T | Sanivali | null | undefined)?];
 
 export type IfElseRuleItem<T = SanivaliDefaultRuleSchema> = [
   'ifElse',
@@ -16,10 +18,19 @@ export type IfElseRuleItem<T = SanivaliDefaultRuleSchema> = [
 ];
 
 export const ifElseDef: ISanivaliDef = {
-  validator: (
-    { if: ifRule, then: thenRule, else: elseRule }: IfElseParam,
-    context
-  ) => {
+  validator: (param: IfElseParam, context) => {
+    let ifRule: SanivaliDefaultRuleSchema | Sanivali | null | undefined;
+    let thenRule: SanivaliDefaultRuleSchema | Sanivali | null | undefined;
+    let elseRule: SanivaliDefaultRuleSchema | Sanivali | null | undefined;
+
+    if (Array.isArray(param)) {
+      [ifRule, thenRule, elseRule] = param;
+    } else {
+      ifRule = param.if;
+      thenRule = param.then;
+      elseRule = param.else;
+    }
+
     const ifSani = isSanivali(ifRule)
       ? ifRule
       : new Sanivali(ifRule as any, context.defs);
