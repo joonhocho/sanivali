@@ -4,6 +4,9 @@ export declare type DefaultValueThunk = DefaultValue | (() => any);
 export declare type DefaultParam = DefaultValueThunk | {
     value: DefaultValueThunk;
     onNull?: boolean;
+} | {
+    json: string;
+    onNull?: boolean;
 };
 export declare type DefaultRuleItem = ['default', DefaultParam];
 export declare const compileDefaultParam: (param: DefaultParam) => (v: unknown) => any;

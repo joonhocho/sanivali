@@ -63,3 +63,19 @@ test('default onNull getter', () => {
     value: 1,
   });
 });
+
+test('default json', () => {
+  const sani = new Sanivali([['default', { json: '{"a": []}' }]]);
+
+  expect(sani.run(undefined)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: { a: [] },
+  });
+
+  expect(sani.run(null)).toStrictEqual({
+    fatal: false,
+    errors: null,
+    value: null,
+  });
+});
