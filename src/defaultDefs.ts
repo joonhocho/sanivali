@@ -1,3 +1,4 @@
+import { allOfDef, AllOfParam, AllOfRuleItem } from './defaultDefs/allOf';
 import { anyOfDef, AnyOfParam, AnyOfRuleItem } from './defaultDefs/anyOf';
 import { notDef, NotParam, NotRuleItem } from './defaultDefs/not';
 import {
@@ -281,6 +282,7 @@ export const defaultDefs: ISanivaliDefMap = {
   properties: propertiesDef,
 
   // combining
+  allOf: allOfDef,
   anyOf: anyOfDef,
   not: notDef,
 
@@ -361,6 +363,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
   properties?: PropertiesParam<T>;
 
   // combining
+  allOf?: AllOfParam<T>;
   anyOf?: AnyOfParam<T>;
   not?: NotParam<T>;
 
@@ -439,6 +442,7 @@ export type SanivaliDefaultRuleItem<T = any> =
   | PropertiesRuleItem<T>
 
   // combining
+  | AllOfRuleItem<T>
   | AnyOfRuleItem<T>
   | NotRuleItem<T>
 
