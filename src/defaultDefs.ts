@@ -1,4 +1,5 @@
 import { anyOfDef, AnyOfParam, AnyOfRuleItem } from './defaultDefs/anyOf';
+import { notDef, NotParam, NotRuleItem } from './defaultDefs/not';
 import {
   defaultDef,
   DefaultParam,
@@ -281,6 +282,7 @@ export const defaultDefs: ISanivaliDefMap = {
 
   // combining
   anyOf: anyOfDef,
+  not: notDef,
 
   // conditional
   ifElse: ifElseDef,
@@ -360,6 +362,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
 
   // combining
   anyOf?: AnyOfParam<T>;
+  not?: NotParam<T>;
 
   // conditional
   ifElse?: IfElseParam<T>;
@@ -437,6 +440,7 @@ export type SanivaliDefaultRuleItem<T = any> =
 
   // combining
   | AnyOfRuleItem<T>
+  | NotRuleItem<T>
 
   // conditional
   | IfElseRuleItem<T>;

@@ -145,6 +145,7 @@ export {
   MinPropertiesRuleItem,
   minPropertiesDef,
 } from './defaultDefs/minProperties';
+export { NotParam, NotRuleItem, notDef } from './defaultDefs/not';
 export {
   NotEmptyParam,
   NotEmptyRuleItem,

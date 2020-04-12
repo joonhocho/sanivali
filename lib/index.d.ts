@@ -28,6 +28,7 @@ export { MinimumParam, MinimumRuleItem, minimumDef, } from './defaultDefs/minimu
 export { MinItemsParam, MinItemsRuleItem, minItemsDef, } from './defaultDefs/minItems';
 export { MinLengthParam, MinLengthRuleItem, minLengthDef, } from './defaultDefs/minLength';
 export { MinPropertiesParam, MinPropertiesRuleItem, minPropertiesDef, } from './defaultDefs/minProperties';
+export { NotParam, NotRuleItem, notDef } from './defaultDefs/not';
 export { NotEmptyParam, NotEmptyRuleItem, notEmptyDef, } from './defaultDefs/notEmpty';
 export { ParseFloatParam, ParseFloatRuleItem, parseFloatDef, } from './defaultDefs/parseFloat';
 export { ParseIntParam, ParseIntRuleItem, parseIntDef, } from './defaultDefs/parseInt';
