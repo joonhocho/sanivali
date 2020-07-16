@@ -1,6 +1,6 @@
 {
   "name": "sanivali",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Sanitization and validation based on json schema with async and pre-compilation support for Node and Browser written in TypeScript.",
   "keywords": [
     "sanitization",
@@ -51,19 +51,19 @@
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.1",
-    "coveralls": "^3.0.11",
-    "jest": "^25.3.0",
-    "prettier": "^2.0.4",
-    "ts-jest": "^25.3.1",
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.23",
+    "coveralls": "^3.1.0",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.2",
     "tscpaths": "^0.0.9",
     "tsdef": "^0.0.13",
-    "tslint": "^6.1.1",
+    "tslint": "^6.1.2",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
-    "tstf": "^0.0.23",
-    "typescript": "^3.8.3"
+    "tstf": "^0.0.25",
+    "typescript": "^3.9.6"
   },
   "engines": {
     "node": ">=8.0.0"
