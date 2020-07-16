@@ -19,12 +19,13 @@ export const isEmptyObject = (x: unknown) => {
 const { floor } = Math;
 
 export const isInteger =
-  Number.isInteger || ((v) => isFinite(v) && floor(v) === v);
+  Number.isInteger ||
+  ((v: unknown) => typeof v === 'number' && isFinite(v) && floor(v) === v);
 
 export const isEmpty = (v: unknown) =>
   v == null || v === '' || isEmptyObject(v);
 
-export const nilTests: Record<NilType, (x: any) => boolean> = {
+export const nilTests: Record<NilType, (x: unknown) => boolean> = {
   undefined: (x) => x === undefined,
   null: (x) => x === null,
   nil: (x) => x == null,
@@ -32,7 +33,7 @@ export const nilTests: Record<NilType, (x: any) => boolean> = {
   empty: isEmpty,
 };
 
-export const notNilTests: Record<NilType, (x: any) => boolean> = {
+export const notNilTests: Record<NilType, (x: unknown) => boolean> = {
   undefined: (x) => x !== undefined,
   null: (x) => x !== null,
   nil: (x) => x != null,

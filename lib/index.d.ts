@@ -39,6 +39,7 @@ export { RemoveDuplicateItemsParam, RemoveDuplicateItemsRuleItem, removeDuplicat
 export { RemoveItemsParam, RemoveItemsRuleItem, removeItemsDef, } from './defaultDefs/removeItems';
 export { RequiredParam, RequiredRuleItem, requiredDef, } from './defaultDefs/required';
 export { SafeIntegerParam, SafeIntegerRuleItem, safeIntegerDef, } from './defaultDefs/safeInteger';
+export { SanitizeParam, SanitizeRuleItem, sanitizeDef, } from './defaultDefs/sanitize';
 export { ToConstParam, ToConstRuleItem, toConstDef, } from './defaultDefs/toConst';
 export { ToDateParam, ToDateRuleItem, toDateDef } from './defaultDefs/toDate';
 export { ToLocaleLowerCaseParam, ToLocaleLowerCaseRuleItem, toLocaleLowerCaseDef, } from './defaultDefs/toLocaleLowerCase';
@@ -53,4 +54,5 @@ export { TrimToNullParam, TrimToNullRuleItem, trimToNullDef, } from './defaultDe
 export { DataType, TypeParam, TypeRuleItem, typeDef } from './defaultDefs/type';
 export { UniqueItemsParam, UniqueItemsRuleItem, uniqueItemsDef, } from './defaultDefs/uniqueItems';
 export { ValidParam, ValidRuleItem, validDef } from './defaultDefs/valid';
+export { ValidateParam, ValidateRuleItem, validateDef, } from './defaultDefs/validate';
 //# sourceMappingURL=index.d.ts.map

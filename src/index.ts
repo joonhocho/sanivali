@@ -193,6 +193,11 @@ export {
   safeIntegerDef,
 } from './defaultDefs/safeInteger';
 export {
+  SanitizeParam,
+  SanitizeRuleItem,
+  sanitizeDef,
+} from './defaultDefs/sanitize';
+export {
   ToConstParam,
   ToConstRuleItem,
   toConstDef,
@@ -246,3 +251,8 @@ export {
   uniqueItemsDef,
 } from './defaultDefs/uniqueItems';
 export { ValidParam, ValidRuleItem, validDef } from './defaultDefs/valid';
+export {
+  ValidateParam,
+  ValidateRuleItem,
+  validateDef,
+} from './defaultDefs/validate';

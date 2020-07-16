@@ -1,6 +1,6 @@
 import { allOfDef, AllOfParam, AllOfRuleItem } from './defaultDefs/allOf';
 import { anyOfDef, AnyOfParam, AnyOfRuleItem } from './defaultDefs/anyOf';
-import { notDef, NotParam, NotRuleItem } from './defaultDefs/not';
+import { constDef, ConstParam, ConstRuleItem } from './defaultDefs/const';
 import {
   defaultDef,
   DefaultParam,
@@ -26,12 +26,6 @@ import {
   EmptyToNullParam,
   EmptyToNullRuleItem,
 } from './defaultDefs/emptyToNull';
-import {
-  toConstDef,
-  ToConstParam,
-  ToConstRuleItem,
-} from './defaultDefs/toConst';
-import { constDef, ConstParam, ConstRuleItem } from './defaultDefs/const';
 import { enumDef, EnumParam, EnumRuleItem } from './defaultDefs/enum';
 import {
   exclusiveMaximumDef,
@@ -111,6 +105,7 @@ import {
   MinPropertiesParam,
   MinPropertiesRuleItem,
 } from './defaultDefs/minProperties';
+import { notDef, NotParam, NotRuleItem } from './defaultDefs/not';
 import {
   notEmptyDef,
   NotEmptyParam,
@@ -156,6 +151,16 @@ import {
   SafeIntegerParam,
   SafeIntegerRuleItem,
 } from './defaultDefs/safeInteger';
+import {
+  sanitizeDef,
+  SanitizeParam,
+  SanitizeRuleItem,
+} from './defaultDefs/sanitize';
+import {
+  toConstDef,
+  ToConstParam,
+  ToConstRuleItem,
+} from './defaultDefs/toConst';
 import { toDateDef, ToDateParam, ToDateRuleItem } from './defaultDefs/toDate';
 import {
   toLocaleLowerCaseDef,
@@ -205,15 +210,20 @@ import {
   UniqueItemsRuleItem,
 } from './defaultDefs/uniqueItems';
 import { validDef, ValidParam, ValidRuleItem } from './defaultDefs/valid';
-import { ISanivaliDefMap } from './types';
-
+import {
+  validateDef,
+  ValidateParam,
+  ValidateRuleItem,
+} from './defaultDefs/validate';
 import type { Sanivali } from './sanivali';
+import { ISanivaliDefMap } from './types';
 
 export const defaultDefs: ISanivaliDefMap = {
   // general sanitizers
   default: defaultDef,
   toConst: toConstDef,
   emptyToNull: emptyToNullDef,
+  sanitize: sanitizeDef,
 
   // general validators
   valid: validDef,
@@ -222,6 +232,7 @@ export const defaultDefs: ISanivaliDefMap = {
   instance: instanceDef,
   const: constDef,
   enum: enumDef,
+  validate: validateDef,
 
   // number sanitizers
   parseInt: parseIntDef,
@@ -295,6 +306,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
   default?: DefaultParam;
   toConst?: ToConstParam;
   emptyToNull?: EmptyToNullParam;
+  sanitize?: SanitizeParam;
 
   // general validators
   valid?: ValidParam;
@@ -303,6 +315,7 @@ export interface ISanivaliDefaultRuleMap<T = any> {
   instance?: InstanceParam;
   const?: ConstParam;
   enum?: EnumParam;
+  validate?: ValidateParam;
 
   // number sanitizers
   parseInt?: ParseIntParam;
@@ -376,6 +389,7 @@ export type SanivaliDefaultRuleItem<T = any> =
   | DefaultRuleItem
   | ToConstRuleItem
   | EmptyToNullRuleItem
+  | SanitizeRuleItem
 
   // general validators
   | ValidRuleItem
@@ -384,6 +398,7 @@ export type SanivaliDefaultRuleItem<T = any> =
   | InstanceRuleItem
   | ConstRuleItem
   | EnumRuleItem
+  | ValidateRuleItem
 
   // number sanitizers
   | ParseIntRuleItem
