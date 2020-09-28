@@ -1,9 +1,10 @@
+export { addDefaultDefs } from './addAllDefs';
+export { addDef, defaultDefs } from './defaultDefs';
 export {
   ISanivaliDefaultRuleMap,
   SanivaliDefaultRuleItem,
   SanivaliDefaultRuleSchema,
-  defaultDefs,
-} from './defaultDefs';
+} from './defaultDefsTypes';
 export { Sanivali } from './sanivali';
 export {
   AsyncSanitizer,

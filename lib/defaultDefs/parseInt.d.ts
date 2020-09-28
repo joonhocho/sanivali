@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type ParseIntParam = boolean | number | undefined;
 export declare type ParseIntRuleItem = 'parseInt' | ['parseInt', ParseIntParam?];
 export declare const parseIntDef: ISanivaliDef;

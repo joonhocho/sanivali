@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('removeDuplicateItems default', async () => {
   const sani = new Sanivali([['removeDuplicateItems']]);

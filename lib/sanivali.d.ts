@@ -1,5 +1,5 @@
-import { SanivaliDefaultRuleSchema } from './defaultDefs';
-import { ISanivaliDef, ISanivaliDefMap, ISanivaliResult, ISanivaliRunOptions } from './types';
+import type { SanivaliDefaultRuleSchema } from './defaultDefsTypes';
+import type { ISanivaliDef, ISanivaliDefMap, ISanivaliResult, ISanivaliRunOptions } from './types';
 export declare class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
     static is: (x: unknown) => x is Sanivali<any, SanivaliDefaultRuleSchema<any>>;
     isSanivali: boolean;

@@ -1,5 +1,5 @@
-import { ISanivaliDef, NilType } from '_src/types';
-import { notNilTests, ANY_KEY } from '_src/util';
+import type { ISanivaliDef, NilType } from '_src/types';
+import { ANY_KEY, notNilTests } from '_src/util';
 
 export type DeletePropertiesParam =
   | false

@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('filterItems', async () => {
   const sani = new Sanivali([['filterItems', (x: any) => x && x !== 2]]);

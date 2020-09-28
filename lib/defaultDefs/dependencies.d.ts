@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type DependenciesParam = Record<string, string[]>;
 export declare type DependenciesRuleItem = ['dependencies', DependenciesParam];
 export declare const dependenciesDef: ISanivaliDef;

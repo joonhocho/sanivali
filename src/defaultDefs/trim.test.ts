@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('trim', () => {
   const sani = new Sanivali([['type', 'string'], 'trim']);

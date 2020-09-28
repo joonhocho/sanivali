@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type MaxItemsParam = number;
 export declare type MaxItemsRuleItem = ['maxItems', MaxItemsParam];
 export declare const maxItemsDef: ISanivaliDef;

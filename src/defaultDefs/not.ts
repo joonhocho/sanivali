@@ -1,8 +1,7 @@
-import { SanivaliDefaultRuleSchema } from '_src/defaultDefs';
-import { ISanivaliDef } from '_src/types';
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
+import type { ISanivaliDef } from '_src/types';
 import { isSanivali } from '_src/util';
-
-import { Sanivali } from '../sanivali';
+import type { Sanivali } from '../sanivali';
 
 export type NotParam<T = SanivaliDefaultRuleSchema> = T | Sanivali;
 
@@ -12,7 +11,7 @@ export const notDef: ISanivaliDef = {
   validator: (condition: NotParam, context) => {
     const sani = isSanivali(condition)
       ? condition
-      : new Sanivali(condition, context.defs);
+      : context.createSanivali(condition);
 
     if (sani.async) {
       context.rule.async = true;

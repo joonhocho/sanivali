@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('exclusiveMinimum', () => {
   const sani = new Sanivali([['exclusiveMinimum', 10]]);

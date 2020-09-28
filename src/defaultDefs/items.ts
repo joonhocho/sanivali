@@ -1,8 +1,7 @@
-import { ISanivaliDef, ISanivaliResult } from '_src/types';
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
+import type { ISanivaliDef, ISanivaliResult } from '_src/types';
 import { isSanivali } from '_src/util';
-
-import { SanivaliDefaultRuleSchema } from '../defaultDefs';
-import { Sanivali } from '../sanivali';
+import type { Sanivali } from '../sanivali';
 
 export type ItemsParam<T = SanivaliDefaultRuleSchema> = T | Sanivali;
 
@@ -13,9 +12,7 @@ export type ItemsRuleItem<T = SanivaliDefaultRuleSchema> = [
 
 export const itemsDef: ISanivaliDef = {
   validator: (param: ItemsParam, context) => {
-    const sani = isSanivali(param)
-      ? param
-      : new Sanivali(param as any, context.defs);
+    const sani = isSanivali(param) ? param : context.createSanivali(param);
 
     if (sani.async) {
       context.rule.async = true;

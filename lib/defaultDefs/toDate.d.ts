@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type ToDateParam = boolean | undefined;
 export declare type ToDateRuleItem = 'toDate' | ['toDate', ToDateParam?];
 export declare const toDateDef: ISanivaliDef;

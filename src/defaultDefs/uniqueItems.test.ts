@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('uniqueItems default', async () => {
   const sani = new Sanivali([['uniqueItems']]);

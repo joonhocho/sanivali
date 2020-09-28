@@ -1,3 +1,4 @@
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
 import type { Sanivali } from './sanivali';
 
 export type NilType = 'undefined' | 'null' | 'nil' | 'falsy' | 'empty';
@@ -18,6 +19,10 @@ export interface ISanivaliBuildContext {
   path: PropPath | undefined;
   defs: ISanivaliDefMap;
   rule: ISanivaliCompiledDef;
+  createSanivali: (
+    schema: SanivaliDefaultRuleSchema,
+    defs?: ISanivaliDefMap
+  ) => Sanivali;
 }
 
 export type GetSanitizer<Arg = any, Val = any, Val2 = any> = (

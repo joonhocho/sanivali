@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('enum numbers', () => {
   const sani = new Sanivali([['enum', [1, 2, 3]]]);

@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type ParseFloatParam = boolean | undefined;
 export declare type ParseFloatRuleItem = 'parseFloat' | ['parseFloat', ParseFloatParam?];
 export declare const parseFloatDef: ISanivaliDef;

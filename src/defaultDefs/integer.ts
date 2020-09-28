@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '_src/types';
+import type { ISanivaliDef } from '_src/types';
 import { isInteger } from '_src/util';
 
 export type IntegerParam = boolean | undefined;

@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type SanitizeParam = (x: unknown) => unknown;
 export declare type SanitizeRuleItem = ['sanitize', SanitizeParam];
 export declare const sanitizeDef: ISanivaliDef;

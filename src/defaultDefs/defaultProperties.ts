@@ -1,5 +1,5 @@
-import { ISanivaliDef } from '_src/types';
-import { DefaultParam, compileDefaultParam } from './default';
+import type { ISanivaliDef } from '_src/types';
+import { compileDefaultParam, DefaultParam } from './default';
 
 export type DefaultPropertiesParam = Record<string, DefaultParam>;
 

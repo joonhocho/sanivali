@@ -1,5 +1,6 @@
-import { defaultDefs, SanivaliDefaultRuleSchema } from './defaultDefs';
-import {
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
+import { defaultDefs } from './defaultDefs';
+import type {
   ISanivaliBuildContext,
   ISanivaliCompiledDef,
   ISanivaliDef,
@@ -104,6 +105,8 @@ export class Sanivali<T = any, Schema = SanivaliDefaultRuleSchema> {
           path: undefined,
           defs,
           rule: compiled,
+          createSanivali: (schema, defsArg = defs) =>
+            new Sanivali(schema, defsArg),
         };
 
         if (sanitizer) {

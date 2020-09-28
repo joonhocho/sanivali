@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '_src/types';
+import type { ISanivaliDef } from '_src/types';
 
 export type FilterItemsParam = (x: any, i: number) => boolean;
 

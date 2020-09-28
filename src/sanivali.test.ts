@@ -1,6 +1,8 @@
-import { SanivaliDefaultRuleSchema } from '_src/defaultDefs';
-
+import { addDefaultDefs } from '_src/addAllDefs';
+import { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
 import { Sanivali } from './sanivali';
+
+addDefaultDefs();
 
 test('Sanivali addDef / async / skipSanitize / skipValidate', async () => {
   const sani = new Sanivali<any, SanivaliDefaultRuleSchema>([], {

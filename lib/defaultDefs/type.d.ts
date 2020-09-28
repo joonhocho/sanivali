@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type DataType = 'array' | 'bigint' | 'boolean' | 'function' | 'integer' | 'nil' | 'null' | 'number' | 'object' | 'string' | 'symbol' | 'undefined';
 export declare type TypeParam = DataType | DataType[];
 export declare type TypeRuleItem = ['type', TypeParam];

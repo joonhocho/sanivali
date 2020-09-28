@@ -1,4 +1,6 @@
-export { ISanivaliDefaultRuleMap, SanivaliDefaultRuleItem, SanivaliDefaultRuleSchema, defaultDefs, } from './defaultDefs';
+export { addDefaultDefs } from './addAllDefs';
+export { addDef, defaultDefs } from './defaultDefs';
+export { ISanivaliDefaultRuleMap, SanivaliDefaultRuleItem, SanivaliDefaultRuleSchema, } from './defaultDefsTypes';
 export { Sanivali } from './sanivali';
 export { AsyncSanitizer, AsyncValidator, GetSanitizer, GetValidator, ISanivaliBuildContext, ISanivaliCompiledDef, ISanivaliDef, ISanivaliDefMap, ISanivaliError, ISanivaliResult, ISanivaliRunOptions, NilType, PropPath, Sanitizer, SanivaliRule, SanivaliRuleInput, SanivaliRuleMap, SanivaliRuleParsedItem, ValidationResult, Validator, } from './types';
 export { ANY_KEY, isEmpty, isEmptyObject, isInteger, isSanivali, nilTests, notNilTests, } from './util';

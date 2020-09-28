@@ -1,8 +1,7 @@
-import { ISanivaliDef } from '_src/types';
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
+import type { ISanivaliDef } from '_src/types';
 import { isSanivali } from '_src/util';
-
-import { Sanivali } from '../sanivali';
-import { SanivaliDefaultRuleSchema } from '../defaultDefs';
+import type { Sanivali } from '../sanivali';
 
 export type IfElseParam<T = SanivaliDefaultRuleSchema> =
   | {
@@ -31,23 +30,21 @@ export const ifElseDef: ISanivaliDef = {
       elseRule = param.else;
     }
 
-    const ifSani = isSanivali(ifRule)
-      ? ifRule
-      : new Sanivali(ifRule as any, context.defs);
+    const ifSani = isSanivali(ifRule) ? ifRule : context.createSanivali(ifRule);
 
     const thenSani =
       thenRule == null
         ? null
         : isSanivali(thenRule)
         ? thenRule
-        : new Sanivali(thenRule as any, context.defs);
+        : context.createSanivali(thenRule);
 
     const elseSani =
       elseRule == null
         ? null
         : isSanivali(elseRule)
         ? elseRule
-        : new Sanivali(elseRule as any, context.defs);
+        : context.createSanivali(elseRule);
 
     if (
       ifSani.async ||

@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('maxProperties', () => {
   const sani = new Sanivali([['maxProperties', 3]]);

@@ -1,4 +1,4 @@
-import { ISanivaliDef, NilType } from '_src/types';
+import type { ISanivaliDef, NilType } from '_src/types';
 import { notNilTests } from '_src/util';
 
 export type RemoveItemsParam = false | NilType;

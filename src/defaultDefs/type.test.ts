@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('type undefined', () => {
   const sani = new Sanivali([['type', 'undefined']]);

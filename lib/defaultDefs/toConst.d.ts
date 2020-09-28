@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type ToConstParam = any;
 export declare type ToConstRuleItem = ['toConst', ToConstParam];
 export declare const toConstDef: ISanivaliDef;

@@ -1,8 +1,7 @@
-import { ISanivaliDef, ISanivaliResult } from '_src/types';
-import { isSanivali, ANY_KEY } from '_src/util';
-
-import { Sanivali } from '../sanivali';
-import { SanivaliDefaultRuleSchema } from '../defaultDefs';
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
+import type { ISanivaliDef, ISanivaliResult } from '_src/types';
+import { ANY_KEY, isSanivali } from '_src/util';
+import type { Sanivali } from '../sanivali';
 
 export type PropertiesParam<T = SanivaliDefaultRuleSchema> = {
   [key: string]: T | Sanivali;
@@ -28,7 +27,7 @@ export const propertiesDef: ISanivaliDef = {
 
       const sani = isSanivali(propRules)
         ? propRules
-        : new Sanivali(propRules as any, context.defs);
+        : context.createSanivali(propRules);
 
       async = async || sani.async;
 

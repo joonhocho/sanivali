@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type TrimToNullParam = boolean | 'undefined' | undefined;
 export declare type TrimToNullRuleItem = 'trimToNull' | ['trimToNull', TrimToNullParam?];
 export declare const trimToNullDef: ISanivaliDef;

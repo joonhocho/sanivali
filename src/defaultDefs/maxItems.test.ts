@@ -1,4 +1,6 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+addDefaultDefs();
 
 test('maxItems', () => {
   const sani = new Sanivali([['maxItems', 3]]);

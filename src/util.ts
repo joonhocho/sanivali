@@ -1,5 +1,5 @@
 import type { Sanivali } from './sanivali';
-import { NilType } from './types';
+import type { NilType } from './types';
 
 export const isSanivali = (x: unknown): x is Sanivali =>
   x ? (x as Sanivali).isSanivali === true : false;

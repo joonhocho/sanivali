@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type DefaultValue = null | boolean | number | string;
 export declare type DefaultValueThunk = DefaultValue | (() => any);
 export declare type DefaultParam = DefaultValueThunk | {

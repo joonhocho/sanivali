@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '_src/types';
+import type { ISanivaliDef } from '_src/types';
 import { isEmpty } from '_src/util';
 
 export type EmptyToNullParam = boolean | 'undefined' | undefined;

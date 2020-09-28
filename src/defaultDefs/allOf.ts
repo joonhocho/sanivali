@@ -1,8 +1,7 @@
-import { SanivaliDefaultRuleSchema } from '_src/defaultDefs';
-import { ISanivaliDef, ISanivaliResult } from '_src/types';
+import type { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
+import type { ISanivaliDef, ISanivaliResult } from '_src/types';
 import { isSanivali } from '_src/util';
-
-import { Sanivali } from '../sanivali';
+import type { Sanivali } from '../sanivali';
 
 export type AllOfParam<T = SanivaliDefaultRuleSchema> = Array<T | Sanivali>;
 
@@ -15,7 +14,7 @@ export const allOfDef: ISanivaliDef = {
   validator: (conditions: AllOfParam, context) => {
     let async = false;
     const sanis = conditions.map((x) => {
-      const sani = isSanivali(x) ? x : new Sanivali(x as any, context.defs);
+      const sani = isSanivali(x) ? x : context.createSanivali(x);
       async = async || sani.async;
       return sani;
     });

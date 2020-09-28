@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type MinimumParam = number;
 export declare type MinimumRuleItem = ['minimum', MinimumParam];
 export declare const minimumDef: ISanivaliDef;

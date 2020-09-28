@@ -1,5 +1,7 @@
+import { addDefaultDefs } from '_src/addAllDefs';
+import { SanivaliDefaultRuleSchema } from '_src/defaultDefsTypes';
 import { Sanivali } from '../sanivali';
-import { SanivaliDefaultRuleSchema } from '../defaultDefs';
+addDefaultDefs();
 
 test('properties', async () => {
   const sani = new Sanivali<any, SanivaliDefaultRuleSchema>({

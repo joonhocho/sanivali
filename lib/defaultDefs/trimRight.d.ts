@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type TrimRightParam = boolean | undefined;
 export declare type TrimRightRuleItem = 'trimRight' | ['trimRight', TrimRightParam?];
 export declare const trimRightDef: ISanivaliDef;

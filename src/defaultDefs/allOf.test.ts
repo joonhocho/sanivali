@@ -1,4 +1,7 @@
+import { addDefaultDefs } from '_src/addAllDefs';
 import { Sanivali } from '../sanivali';
+
+addDefaultDefs();
 
 test('allOf', async () => {
   const sani = new Sanivali({

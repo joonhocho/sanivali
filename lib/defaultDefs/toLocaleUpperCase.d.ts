@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type ToLocaleUpperCaseParam = string | string[] | undefined;
 export declare type ToLocaleUpperCaseRuleItem = 'toLocaleUpperCase' | ['toLocaleUpperCase', ToLocaleUpperCaseParam?];
 export declare const toLocaleUpperCaseDef: ISanivaliDef;

@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type ValidateParam = (x: unknown) => boolean;
 export declare type ValidateRuleItem = ['validate', ValidateParam];
 export declare const validateDef: ISanivaliDef;

@@ -1,4 +1,4 @@
-import { ISanivaliDef } from '../types';
+import type { ISanivaliDef } from '../types';
 export declare type FiniteParam = boolean | undefined;
 export declare type FiniteRuleItem = 'finite' | ['finite', FiniteParam?];
 export declare const finiteDef: ISanivaliDef;

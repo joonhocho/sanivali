@@ -1,3 +1,4 @@
+import type { SanivaliDefaultRuleSchema } from './defaultDefsTypes';
 import type { Sanivali } from './sanivali';
 export declare type NilType = 'undefined' | 'null' | 'nil' | 'falsy' | 'empty';
 export declare type PropPath = Array<string | number>;
@@ -7,6 +8,7 @@ export interface ISanivaliBuildContext {
     path: PropPath | undefined;
     defs: ISanivaliDefMap;
     rule: ISanivaliCompiledDef;
+    createSanivali: (schema: SanivaliDefaultRuleSchema, defs?: ISanivaliDefMap) => Sanivali;
 }
 export declare type GetSanitizer<Arg = any, Val = any, Val2 = any> = (arg: Arg, context: ISanivaliBuildContext) => Sanitizer<Val, Val2> | AsyncSanitizer<Val, Val2> | null;
 export declare type ValidationResult = boolean | ISanivaliResult;
