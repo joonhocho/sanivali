@@ -1,6 +1,6 @@
 {
   "name": "sanivali",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sanitization and validation based on json schema with async and pre-compilation support for Node and Browser written in TypeScript.",
   "keywords": [
     "sanitization",
