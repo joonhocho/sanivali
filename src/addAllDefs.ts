@@ -53,7 +53,12 @@ import { uniqueItemsDef } from './defaultDefs/uniqueItems';
 import { validDef } from './defaultDefs/valid';
 import { validateDef } from './defaultDefs/validate';
 
+let defaultDefsAdded = false;
+
 export const addDefaultDefs = () => {
+  if (defaultDefsAdded) return;
+  defaultDefsAdded = true;
+
   addDef('allOf', allOfDef);
   addDef('anyOf', anyOfDef);
   addDef('const', constDef);
